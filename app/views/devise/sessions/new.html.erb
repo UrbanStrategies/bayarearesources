@@ -1,0 +1,23 @@
+<div class='page-header'>
+  <h1>
+    Sign In
+  </h1>
+</div>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div><%= f.label :email %>
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %>
+  <%= f.password_field :password %></div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div><%= f.check_box :remember_me %> Remember me</div>
+  <% end -%>
+  
+  <br />
+
+  <div><%= f.submit "Sign in", :class => 'btn-primary btn-large' %></div>
+<% end %>
+
+<%= render "links" %>
