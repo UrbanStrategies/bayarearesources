@@ -1,59 +1,12 @@
-%h1 Listing locations
+.page-header
+  %h1
+    Locations
 
-%table
-  %tr
-    %th Organization
-    %th Name
-    %th Address
-    %th City
-    %th Zipcode
-    %th Latitude
-    %th Longitude
-    %th Phone
-    %th Fax
-    %th Email
-    %th Hours
-    %th Directions
-    %th Wheelchair accessible
-    %th Bart accessible
-    %th Muni bus accessible
-    %th Muni train accessible
-    %th Ac bus accessible
-    %th Free parking
-    %th Parking meters
-    %th Paid parking lot
-    %th Free street parking
-    %th Public transportation stop
-    %th Parking fees
-    %th
-    %th
-    %th
-
+%table.large
   - @locations.each do |location|
     %tr
-      %td= location.organization_id
-      %td= location.name
-      %td= location.address
-      %td= location.city
-      %td= location.zipcode
-      %td= location.latitude
-      %td= location.longitude
-      %td= location.phone
-      %td= location.fax
-      %td= location.email
-      %td= location.hours
-      %td= location.directions
-      %td= location.wheelchair_accessible
-      %td= location.bart_accessible
-      %td= location.muni_bus_accessible
-      %td= location.muni_train_accessible
-      %td= location.ac_bus_accessible
-      %td= location.free_parking
-      %td= location.parking_meters
-      %td= location.paid_parking_lot
-      %td= location.free_street_parking
-      %td= location.public_transportation_stop
-      %td= location.parking_fees
+      %td
+        %h3= location.name
       %td= link_to 'Show', location
       %td= link_to 'Edit', edit_location_path(location)
       %td= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete

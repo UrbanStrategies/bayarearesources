@@ -2,12 +2,11 @@
   %h1
     Services
 
-%table
+%table.large
   - @services.each do |service|
     %tr
       %td
         %h3= service.name
-        %br/
       %td= link_to 'Show', service
       %td= link_to 'Edit', edit_service_path(service)
       %td= link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete

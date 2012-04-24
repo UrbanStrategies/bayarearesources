@@ -5,75 +5,90 @@
       %ul
         - @location.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :organization_id
-    = f.number_field :organization_id
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :address
-    = f.text_field :address
-  .field
-    = f.label :city
-    = f.text_field :city
-  .field
-    = f.label :zipcode
-    = f.text_field :zipcode
-  .field
-    = f.label :latitude
-    = f.text_field :latitude
-  .field
-    = f.label :longitude
-    = f.text_field :longitude
-  .field
-    = f.label :phone
-    = f.text_field :phone
-  .field
-    = f.label :fax
-    = f.text_field :fax
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :hours
-    = f.text_area :hours
-  .field
-    = f.label :directions
-    = f.text_area :directions
-  .field
-    = f.label :wheelchair_accessible
-    = f.check_box :wheelchair_accessible
-  .field
-    = f.label :bart_accessible
-    = f.check_box :bart_accessible
-  .field
-    = f.label :muni_bus_accessible
-    = f.check_box :muni_bus_accessible
-  .field
-    = f.label :muni_train_accessible
-    = f.check_box :muni_train_accessible
-  .field
-    = f.label :ac_bus_accessible
-    = f.check_box :ac_bus_accessible
-  .field
-    = f.label :free_parking
-    = f.check_box :free_parking
-  .field
-    = f.label :parking_meters
-    = f.check_box :parking_meters
-  .field
-    = f.label :paid_parking_lot
-    = f.check_box :paid_parking_lot
-  .field
-    = f.label :free_street_parking
-    = f.check_box :free_street_parking
-  .field
-    = f.label :public_transportation_stop
-    = f.text_field :public_transportation_stop
-  .field
-    = f.label :parking_fees
-    = f.text_field :parking_fees
-  .actions
-    = f.submit 'Save'
+  
+  %table.large.thirds
+    %tr
+      %td
+        %h2 Overview
+        %br/
+        .field
+          = f.label :organization_id
+          = f.select :organization_id, options_from_collection_for_select(@organizations, :id, :name)
+        .field
+          = f.label :address
+          = f.text_field :address
+        .field
+          = f.label :city
+          = f.text_field :city
+        .field
+          = f.label :zipcode
+          = f.text_field :zipcode
+        .field
+          = f.label :phone
+          = f.text_field :phone
+        .field
+          = f.label :fax
+          = f.text_field :fax
+        .field
+          = f.label :email
+          = f.text_field :email
+        .field
+          = f.label :hours
+          = f.text_area :hours, :rows => 5
+      %td
+        %h2 Transportation
+        %br/
+        .field
+          = f.label :directions
+          = f.text_area :directions, :rows => 10
+        .field
+          = f.check_box :wheelchair_accessible
+          Wheelchair accessible
+        .field
+          = f.check_box :bart_accessible
+          BART accessible
+        .field
+          = f.check_box :muni_bus_accessible
+          Muni bus accessible
+        .field
+          = f.check_box :muni_train_accessible
+          Muni train accessible
+        .field
+          = f.check_box :ac_bus_accessible
+          AC bus accessible
+        .field
+          = f.check_box :free_parking
+          Free parking
+        .field
+          = f.check_box :parking_meters
+          Parking meters
+        .field
+          = f.check_box :paid_parking_lot
+          Paid parking lot
+        .field
+          = f.check_box :free_street_parking
+          Free street parking
+  
+        .field
+          %br/
+          = f.label :public_transportation_stop
+          = f.text_field :public_transportation_stop
+        .field
+          = f.label :parking_fees
+          = f.text_field :parking_fees
+      %td
+        %h2 Services
+        %br/
+        - for service in @services
+          .field
+            - if @location.services.include?(service)
+              = check_box_tag "[services][#{service.id}]", 1, true
+            - else
+              = check_box_tag "[services][#{service.id}]"
+            = service.name
+  .well
+    .actions
+      %br/
+      = f.submit 'Save', :class => 'btn-primary btn-large'
+      &nbsp;&nbsp;
+      = link_to 'Cancel', locations_path

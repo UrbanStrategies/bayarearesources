@@ -2,12 +2,11 @@
   %h1
     Organizations
 
-%table
+%table.large
   - @organizations.each do |organization|
     %tr
       %td
         %h3= organization.name
-        %br/
       %td= link_to 'Show', organization
       %td= link_to 'Edit', edit_organization_path(organization)
       %td= link_to 'Destroy', organization, :confirm => 'Are you sure?', :method => :delete

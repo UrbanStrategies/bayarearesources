@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_variables
   
   # GET /locations
   # GET /locations.json
@@ -59,9 +60,20 @@ class LocationsController < ApplicationController
   # PUT /locations/1.json
   def update
     @location = Location.find(params[:id])
-
+    @services = []
+    if params[:services].present?
+      params[:services].each do |s|
+        @services << Service.find(s[0].to_i)
+      end
+    end
+    
     respond_to do |format|
       if @location.update_attributes(params[:location])
+        if @services.blank?
+          @location.services.delete_all
+        else
+          @location.services << @services
+        end
         format.html { redirect_to @location, notice: 'Location was successfully updated.' }
         format.json { head :no_content }
       else
@@ -81,5 +93,11 @@ class LocationsController < ApplicationController
       format.html { redirect_to locations_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  def load_variables
+    @organizations = Organization.all(:order => :name)
+    @services = Service.all(:order => :name)
   end
 end
