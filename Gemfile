@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
+gem 'pg', :group => [:production]
+gem 'sqlite3', :group => [:development, :test]
 gem 'jquery-rails'
 gem 'haml-rails'
-gem 'pg'
 gem 'geocoder'
 gem 'devise'
-gem 'sqlite3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
