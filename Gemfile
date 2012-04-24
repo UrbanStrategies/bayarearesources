@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
 gem 'pg', :group => [:production]
-gem 'sqlite3', :group => [:development, :test]
+# gem 'sqlite3', :group => [:development, :test]
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'geocoder'
