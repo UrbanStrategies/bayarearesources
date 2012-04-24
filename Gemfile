@@ -24,6 +24,7 @@ group :assets do
 end
 
 group :developemt do
+  gem 'taps'
   gem 'thin'
   gem 'foreman'
   gem 'sqlite3'
