@@ -1,4 +1,6 @@
 Bayarearesources::Application.routes.draw do
+  root :to => "organizations#index" 
+  
   resources :services
 
   resources :locations
