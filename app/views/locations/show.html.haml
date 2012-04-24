@@ -1,0 +1,75 @@
+%p#notice= notice
+
+%p
+  %b Organization:
+  = @location.organization_id
+%p
+  %b Name:
+  = @location.name
+%p
+  %b Address:
+  = @location.address
+%p
+  %b City:
+  = @location.city
+%p
+  %b Zipcode:
+  = @location.zipcode
+%p
+  %b Latitude:
+  = @location.latitude
+%p
+  %b Longitude:
+  = @location.longitude
+%p
+  %b Phone:
+  = @location.phone
+%p
+  %b Fax:
+  = @location.fax
+%p
+  %b Email:
+  = @location.email
+%p
+  %b Hours:
+  = @location.hours
+%p
+  %b Directions:
+  = @location.directions
+%p
+  %b Wheelchair accessible:
+  = @location.wheelchair_accessible
+%p
+  %b Bart accessible:
+  = @location.bart_accessible
+%p
+  %b Muni bus accessible:
+  = @location.muni_bus_accessible
+%p
+  %b Muni train accessible:
+  = @location.muni_train_accessible
+%p
+  %b Ac bus accessible:
+  = @location.ac_bus_accessible
+%p
+  %b Free parking:
+  = @location.free_parking
+%p
+  %b Parking meters:
+  = @location.parking_meters
+%p
+  %b Paid parking lot:
+  = @location.paid_parking_lot
+%p
+  %b Free street parking:
+  = @location.free_street_parking
+%p
+  %b Public transportation stop:
+  = @location.public_transportation_stop
+%p
+  %b Parking fees:
+  = @location.parking_fees
+
+= link_to 'Edit', edit_location_path(@location)
+\|
+= link_to 'Back', locations_path

@@ -4,7 +4,6 @@ gem 'rails', '3.2.3'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'pg'
-gem 'sqlite3'
 gem 'geocoder'
 gem 'devise'
 
@@ -27,6 +26,7 @@ end
 group :developemt do
   gem 'thin'
   gem 'foreman'
+  gem 'sqlite3'
 end
 
 

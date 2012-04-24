@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  organization_id: 1
+  name: MyString
+  address: MyString
+  city: MyString
+  zipcode: MyString
+  latitude: 1.5
+  longitude: 1.5
+  phone: MyString
+  fax: MyString
+  email: MyString
+  hours: MyText
+  directions: MyText
+  wheelchair_accessible: false
+  bart_accessible: false
+  muni_bus_accessible: false
+  muni_train_accessible: false
+  ac_bus_accessible: false
+  free_parking: false
+  parking_meters: false
+  paid_parking_lot: false
+  free_street_parking: false
+  public_transportation_stop: MyString
+  parking_fees: MyString
+
+two:
+  organization_id: 1
+  name: MyString
+  address: MyString
+  city: MyString
+  zipcode: MyString
+  latitude: 1.5
+  longitude: 1.5
+  phone: MyString
+  fax: MyString
+  email: MyString
+  hours: MyText
+  directions: MyText
+  wheelchair_accessible: false
+  bart_accessible: false
+  muni_bus_accessible: false
+  muni_train_accessible: false
+  ac_bus_accessible: false
+  free_parking: false
+  parking_meters: false
+  paid_parking_lot: false
+  free_street_parking: false
+  public_transportation_stop: MyString
+  parking_fees: MyString

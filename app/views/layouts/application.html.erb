@@ -39,12 +39,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">ACCAN</a>
+          <a class="brand" href="#">Bay Area Resources</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><%= link_to 'Organizations', organizations_path %></li>
+              <li><%= link_to 'Services', services_path %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -52,6 +52,16 @@
     </div>
 
     <div class="container">
+      <% if flash[:alert] %>
+        <div class='alert alert-error'>
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+      <% if flash[:notice] %>
+        <div class='alert alert-success'>
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
 
       <%= yield %>
 

@@ -1,4 +1,12 @@
 Bayarearesources::Application.routes.draw do
+  resources :services
+
+  resources :locations
+
+  resources :organizations
+
+  resources :categories
+
   devise_for :users
 
   # The priority is based upon order of creation:
