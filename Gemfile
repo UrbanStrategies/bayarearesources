@@ -2,9 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
 gem 'pg', :group => [:production]
-# gem 'sqlite3', :group => [:development, :test]
-gem 'jquery-rails'
-gem 'haml-rails'
 gem 'geocoder'
 gem 'devise'
 
@@ -17,7 +14,8 @@ gem 'devise'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
+  gem 'jquery-rails'
+  gem 'haml-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platform => :ruby
 
@@ -25,7 +23,6 @@ group :assets do
 end
 
 group :developemt do
-  gem 'taps'
   gem 'thin'
   gem 'foreman'
 end
