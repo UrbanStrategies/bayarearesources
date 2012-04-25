@@ -2,8 +2,26 @@
   %h1
     Locations
 
-%table.large
-  - @locations.each do |location|
-    %tr
-      %td
-        %h3= location.address
+= form_tag('/locations', :method => :get)
+= text_field_tag :address, nil, :placeholder => "#{@address_placehoder}"
+= submit_tag "Search"
+- if params[:address]
+  &nbsp;
+  = link_to 'reset', locations_path
+
+%br/
+%br/
+
+- if params[:address].present? && @locations.blank?
+  .alert.alert-error
+    There are no results within 100 miles of your search - please try again.
+- else
+  %table.table
+    - @locations.each do |location|
+      %tr
+        %td
+          = location.address
+        %td{:width=>'90px'}
+          - if params[:address].present?
+            = location.try(:distance).try(:slice, 0..3)
+            miles
