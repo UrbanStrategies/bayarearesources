@@ -6,6 +6,8 @@ Bayarearesources::Application.routes.draw do
   resources :services
   devise_for :users
   
+  
+  match '/admin/' => 'admin/organizations#index'
   namespace :admin do
     resources :categories
     resources :organizations do

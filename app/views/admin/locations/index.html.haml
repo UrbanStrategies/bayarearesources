@@ -1,15 +1,13 @@
-.page-header
-  %h1
-    Locations
+%h1.header
+  Locations
 
-%table.large
+%table.table
   - @locations.each do |location|
     %tr
       %td
         %h3= location.address
-      %td= link_to 'Edit', edit_admin_organization_location_path(@organization, location)
-      %td= link_to 'Delete', admin_organization_location_path(@organization, location), :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Edit', edit_admin_organization_location_path(@organization, location), :class => 'btn btn-mini'
+      %td= link_to 'Delete', admin_organization_location_path(@organization, location), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
 
-%br
-
-= link_to 'New Location', new_admin_organization_location_path(@organization)
+%br/
+= link_to 'New Location', new_admin_organization_location_path(@organization), :class => 'btn btn-success'

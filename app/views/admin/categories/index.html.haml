@@ -1,20 +1,13 @@
-%h1 Listing categories
+%h1.header
+  Categories
 
-%table
-  %tr
-    %th Name
-    %th Description
-    %th
-    %th
-    %th
-
+%table.table
   - @categories.each do |category|
     %tr
-      %td= category.name
-      %td= category.description
-      %td= link_to 'Edit', edit_admin_category_path(category)
-      %td= link_to 'Delete', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete
+      %td
+        %h3= category.name
+      %td= link_to 'Edit', edit_admin_category_path(category), :class => 'btn btn-mini'
+      %td= link_to 'Delete', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
 
-%br
-
-= link_to 'New Category', new_admin_category_path
+%br/
+= link_to 'New Category', new_admin_category_path, :class => 'btn btn-success'

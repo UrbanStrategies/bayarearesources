@@ -1,4 +1,5 @@
 class Admin::ServicesController < ApplicationController
+  layout 'admin'
   before_filter :authenticate_user!
   
   def index
