@@ -1,7 +1,5 @@
-.page-header
-  %h1
-    New Service
+%h1.header
+  New Service
 
-= render 'form'
-
-= link_to 'Back', services_path
+= form_for( :service, :url => admin_services_path, :html => {:method => :post}) do |f|
+  = render :partial => 'form', :locals => {:f => f}

@@ -6,8 +6,8 @@
     %tr
       %td
         %h3= category.name
-      %td= link_to 'Edit', edit_admin_category_path(category), :class => 'btn btn-mini'
-      %td= link_to 'Delete', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
+      %td{:width=>'40px'}= link_to 'Edit', edit_admin_category_path(category), :class => 'btn btn-mini'
+      %td{:width=>'50px'}= link_to 'Delete', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
 
 %br/
-= link_to 'New Category', new_admin_category_path, :class => 'btn btn-success'
+= link_to 'New Category', new_admin_category_path, :class => 'btn btn-large btn-success'

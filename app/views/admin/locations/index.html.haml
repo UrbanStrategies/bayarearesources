@@ -6,8 +6,8 @@
     %tr
       %td
         %h3= location.address
-      %td= link_to 'Edit', edit_admin_organization_location_path(@organization, location), :class => 'btn btn-mini'
-      %td= link_to 'Delete', admin_organization_location_path(@organization, location), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
+      %td{:width=>'40px'}= link_to 'Edit', edit_admin_organization_location_path(@organization, location), :class => 'btn btn-mini'
+      %td{:width=>'50px'}= link_to 'Delete', admin_organization_location_path(@organization, location), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
 
 %br/
-= link_to 'New Location', new_admin_organization_location_path(@organization), :class => 'btn btn-success'
+= link_to 'New Location', new_admin_organization_location_path(@organization), :class => 'btn btn-large btn-success'

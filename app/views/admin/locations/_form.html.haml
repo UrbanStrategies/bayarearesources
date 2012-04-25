@@ -88,6 +88,6 @@
 .well
   .actions
     %br/
-    = f.submit 'Save', :class => 'btn-primary btn-large'
+    = f.submit 'Save', :class => 'btn btn-success btn-large'
     &nbsp;&nbsp;
-    = link_to 'Cancel', locations_path
+    = link_to 'Cancel', admin_organization_locations_path(@organization)
