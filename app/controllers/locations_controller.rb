@@ -9,6 +9,8 @@ class LocationsController < ApplicationController
       @address_placehoder = 'Address City, State'
     end
     
+    @json = @locations.to_gmaps4rails
+    
     respond_to do |format|
       format.html # index.html.erb
     end

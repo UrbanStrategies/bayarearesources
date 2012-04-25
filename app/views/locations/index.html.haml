@@ -9,8 +9,7 @@
   &nbsp;
   = link_to 'reset', locations_path
 
-%br/
-%br/
+= gmaps4rails(@json)
 
 - if params[:address].present? && @locations.blank?
   .alert.alert-error
@@ -20,8 +19,12 @@
     - @locations.each do |location|
       %tr
         %td
-          = location.address
+          %h3
+            = location.try(:organization).try(:name)
+          = location.gmaps4rails_address
         %td{:width=>'90px'}
           - if params[:address].present?
             = location.try(:distance).try(:slice, 0..3)
             miles
+        %td{:width=>'80px'}
+          = link_to 'More Info', location_path(location), :class => 'btn btn-primary'

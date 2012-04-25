@@ -27,6 +27,7 @@
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
     
     <%= csrf_meta_tags %>
+    <%= yield :head %>
   </head>
 
   <body>
@@ -73,6 +74,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+    <%= yield :scripts %>
 
   </body>
 </html>
