@@ -1,0 +1,15 @@
+.page-header
+  %h1
+    Locations
+
+%table.large
+  - @locations.each do |location|
+    %tr
+      %td
+        %h3= location.address
+      %td= link_to 'Edit', edit_admin_organization_location_path(@organization, location)
+      %td= link_to 'Destroy', admin_organization_location_path(@organization, location), :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Location', new_admin_organization_location_path(@organization)
