@@ -1,6 +1,6 @@
 Bayarearesources::Application.routes.draw do
   
-  root :to => "locations#index"   
+  root :to => 'high_voltage/pages#show', :id => 'home'   
   
   resources :locations, :only => [:index, :show]
   resources :services
