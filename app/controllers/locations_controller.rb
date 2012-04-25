@@ -18,6 +18,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    @json = @location.to_gmaps4rails
 
     respond_to do |format|
       format.html # show.html.erb
