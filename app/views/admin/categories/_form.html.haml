@@ -10,8 +10,10 @@
   = f.text_field :name
 .field
   = f.label :description
-  = f.text_area :description
+  = f.text_area :description, :rows => 10
+  
 .actions
+  %br/
   = f.submit 'Save', :class => 'btn btn-success btn-large'
   &nbsp;&nbsp;
   = link_to 'Cancel', admin_categories_path
