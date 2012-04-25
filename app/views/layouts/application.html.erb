@@ -39,12 +39,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Bay Area Resources</a>
-          <div class="nav-collapse">
+          <%= link_to 'Bay Area Resources', root_url, :class => 'brand' %>
+          <div class="nav-collapse pull-right">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><%= link_to 'Organizations', organizations_path %></li>
-              <li><%= link_to 'Services', services_path %></li>
+              <% if current_user %>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+              <% else %>
+                <li><%= link_to 'Sign In', new_user_session_path %></li>              
+              <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
