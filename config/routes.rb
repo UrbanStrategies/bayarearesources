@@ -14,6 +14,7 @@ Bayarearesources::Application.routes.draw do
       resources :locations
     end
     resources :services
+    resources :users
   end
 
   # The priority is based upon order of creation:

@@ -44,7 +44,8 @@
             <ul class="nav">
               <li><%= link_to 'Organizations', admin_organizations_path %></li>
               <li><%= link_to 'Services', admin_services_path %></li>
-              <li><%= link_to 'Categories', admin_categories_path %></li>
+              <li><%= link_to 'Users', admin_users_path %></li>
+              <li class='divider-vertical'></li>
               <% if current_user %>
                 <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
               <% else %>

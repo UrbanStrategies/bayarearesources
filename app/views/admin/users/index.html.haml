@@ -1,0 +1,13 @@
+%h1.header
+  Users
+
+%table.table
+  - @users.each do |user|
+    %tr
+      %td
+        %h3= user.email
+      %td{:width=>'40px'}= link_to 'Edit', edit_admin_user_path(user), :class => 'btn btn-mini'
+      %td{:width=>'50px'}= link_to 'Delete', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
+
+%br/
+= link_to 'New User', new_admin_user_path, :class => 'btn btn-large btn-success'
