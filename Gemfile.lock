@@ -57,6 +57,7 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    high_voltage (1.1.1)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -132,6 +133,7 @@ DEPENDENCIES
   foreman
   geocoder
   haml-rails
+  high_voltage
   jquery-rails
   pg
   rails (= 3.2.3)
