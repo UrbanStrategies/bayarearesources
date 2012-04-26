@@ -1,9 +1,10 @@
 class Admin::ServicesController < ApplicationController
   layout 'admin'
   before_filter :authenticate_user!
+  before_filter :load_variables
   
   def index
-    @services = Service.all
+    @services = Service.all(:order=>:name)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -61,5 +62,10 @@ class Admin::ServicesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to admin_services_url }
     end
+  end
+  
+  private
+  def load_variables
+    @categories = Category.all(:order=>:name)
   end
 end

@@ -1,5 +1,8 @@
 %h1.header
   Services
+= link_to 'Edit Categories', admin_categories_path
+%br/
+%br/
 
 %table.table
   - @services.each do |service|
@@ -7,7 +10,7 @@
       %td
         %h3= service.name
       %td{:width=>'40px'}= link_to 'Edit', edit_admin_service_path(service), :class => 'btn btn-mini'
-      %td{:width=>'50px'}= link_to 'Delete', admin_service_path(service), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
+      %td{:width=>'50px'}= link_to 'Delete', admin_service_path(service), :confirm => "Delete '#{service.name}?'", :method => :delete, :class => 'btn btn-mini btn-danger'
 
 %br/
 = link_to 'New Service', new_admin_service_path, :class => 'btn btn-large btn-success'

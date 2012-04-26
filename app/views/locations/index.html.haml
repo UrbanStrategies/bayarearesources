@@ -16,9 +16,16 @@
     There are no results within 100 miles of your search - please try again.
 - else
   %table.table
+    %thead
+      %tr
+        %td{:width=>'350px'} Organization
+        - for category in @categories
+          %td.center
+            = category.name
+        %td &nbsp;
     - @locations.each do |location|
       %tr
-        %td
+        %td{:width=>'350px'}
           %h3
             = location.try(:organization).try(:name)
           = location.gmaps4rails_address
@@ -26,5 +33,9 @@
           - if params[:address].present?
             = location.try(:distance).try(:slice, 0..3)
             miles
+        - for category in @categories
+          %td.center
+            - if (location.services & category.services).present?
+              X
         %td{:width=>'80px'}
           = link_to 'More Info', location_path(location), :class => 'btn btn-primary'
