@@ -1,5 +1,5 @@
 %h1.header
   New Service
 
-= form_for( :service, :url => admin_services_path, :html => {:method => :post}) do |f|
+= form_for( :service, :url => admin_category_services_path(@category), :html => {:method => :post}) do |f|
   = render :partial => 'form', :locals => {:f => f}

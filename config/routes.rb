@@ -9,11 +9,12 @@ Bayarearesources::Application.routes.draw do
   
   match '/admin/' => 'admin/organizations#index'
   namespace :admin do
-    resources :categories
+    resources :categories do
+      resources :services
+    end
     resources :organizations do
       resources :locations
     end
-    resources :services
     resources :users
   end
 

@@ -5,15 +5,16 @@
       - @service.errors.full_messages.each do |msg|
         %li= msg
 
-.field
-  = f.label :category_id
-  = f.select :category_id, options_from_collection_for_select(@categories, :id, :name)
+- unless params[:action] == 'new'
+  .field
+    = f.label :category_id
+    = f.select :category_id, options_from_collection_for_select(@categories, :id, :name)
 .field
   = f.label :name
   = f.text_field :name
 .field
   = f.label :description
-  = f.text_area :description
+  = f.text_area :description, :rows => 10
 
 .actions
   %br/

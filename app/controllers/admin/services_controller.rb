@@ -4,7 +4,7 @@ class Admin::ServicesController < ApplicationController
   before_filter :load_variables
   
   def index
-    @services = Service.all(:order=>:name)
+    @services = @category.services
 
     respond_to do |format|
       format.html # index.html.erb
@@ -33,10 +33,11 @@ class Admin::ServicesController < ApplicationController
 
   def create
     @service = Service.new(params[:service])
-
+    @service.category_id = @category.id
+    
     respond_to do |format|
       if @service.save
-        format.html { redirect_to admin_services_url, notice: 'Service was successfully created.' }
+        format.html { redirect_to admin_category_services_url(@category), notice: 'Service was successfully created.' }
       else
         format.html { render action: "new" }
       end
@@ -48,7 +49,7 @@ class Admin::ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.update_attributes(params[:service])
-        format.html { redirect_to admin_services_url, notice: 'Service was successfully updated.' }
+        format.html { redirect_to admin_category_services_url(@category), notice: 'Service was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
@@ -60,12 +61,13 @@ class Admin::ServicesController < ApplicationController
     @service.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_services_url }
+      format.html { redirect_to admin_category_services_url(@category) }
     end
   end
   
   private
   def load_variables
     @categories = Category.all(:order=>:name)
+    @category = Category.find(params[:category_id])
   end
 end
