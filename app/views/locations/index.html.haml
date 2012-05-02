@@ -1,15 +1,14 @@
 %br/
-.well
-  .row
-    .span7
-      Welcome to Bay Area Resources. To get started, please enter your home address and then click 'Search' to see the resources near you.
-    .span4
-      = form_tag('/locations', :method => :get)
-      = text_field_tag :address, nil, :placeholder => "#{@address_placehoder}"
-      = submit_tag "Search"
-      - if params[:address]
-        &nbsp;
-        = link_to 'reset', locations_path
+.row
+  .span7
+    Welcome to Bay Area Resources. To get started, please enter your home address and then click 'Search' to see the resources near you.
+  .span5
+    = form_tag('/locations', :method => :get)
+    = text_field_tag :address, nil, :placeholder => "#{@address_placehoder}"
+    = submit_tag "Search"
+    - if params[:address]
+      &nbsp;
+      = link_to 'reset', locations_path
         
 = gmaps4rails(@json)
 
