@@ -1,41 +1,45 @@
-%h1
-  Resources
 %br/
 .well
-  = form_tag('/locations', :method => :get)
-  = text_field_tag :address, nil, :placeholder => "#{@address_placehoder}"
-  = submit_tag "Search"
-  - if params[:address]
-    &nbsp;
-    = link_to 'reset', locations_path
+  .row
+    .span7
+      Welcome to Bay Area Resources. To get started, please enter your home address and then click 'Search' to see the resources near you.
+    .span4
+      = form_tag('/locations', :method => :get)
+      = text_field_tag :address, nil, :placeholder => "#{@address_placehoder}"
+      = submit_tag "Search"
+      - if params[:address]
+        &nbsp;
+        = link_to 'reset', locations_path
         
 = gmaps4rails(@json)
 
-- if params[:address].present? && @locations.blank?
-  .alert.alert-error
-    There are no results within 100 miles of your search - please try again.
-- else
-  %table.table
-    %thead
-      %tr
-        %td{:width=>'350px'} &nbsp;
-        - for category in @categories
-          %td.center
-            = category.name
-        %td &nbsp;
-    - @locations.each do |location|
-      %tr
-        %td{:width=>'350px'}
-          %h3
-            = location.try(:organization).try(:name)
-          = location.gmaps4rails_address
-        %td{:width=>'90px'}
-          - if params[:address].present?
-            = location.try(:distance).try(:slice, 0..3)
-            miles
-        - for category in @categories
-          %td.center
-            - if (location.services & category.services).present?
-              X
-        %td{:width=>'80px'}
-          = link_to 'More Info', location_path(location), :class => 'btn btn-primary'
+.row
+  .span3
+    %h3 Filter Your Results
+    %br/
+    %h4 Categories
+    %br/
+    - for category in @categories
+      = check_box_tag "[categories][#{category.id}]"
+      &nbsp;
+      = category.name
+      %br/
+      %br/
+  .span9
+    - if params[:address].present? && @locations.blank?
+      .alert.alert-error
+        There are no results within 100 miles of your search - please try again.
+    - else
+      %table.table
+        - @locations.each do |location|
+          %tr
+            %td
+              %h3
+                = location.try(:organization).try(:name)
+              = location.gmaps4rails_address
+            %td{:width=>'90px'}
+              - if params[:address].present?
+                = location.try(:distance).try(:slice, 0..3)
+                miles
+            %td{:width=>'80px'}
+              = link_to 'More Info', location_path(location), :class => 'btn btn-primary'
