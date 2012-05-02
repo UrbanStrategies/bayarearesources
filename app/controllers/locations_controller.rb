@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
       @address_placehoder = params[:address]
     else
       @locations = Location.all
-      @address_placehoder = 'Address City, State'
+      @address_placehoder = 'Your address'
     end
     
     @json = @locations.to_gmaps4rails

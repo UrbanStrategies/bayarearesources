@@ -1,14 +1,14 @@
-.page-header
-  %h1
-    Resource Locations
-
-= form_tag('/locations', :method => :get)
-= text_field_tag :address, nil, :placeholder => "#{@address_placehoder}"
-= submit_tag "Search"
-- if params[:address]
-  &nbsp;
-  = link_to 'reset', locations_path
-
+%h1
+  Resources
+%br/
+.well
+  = form_tag('/locations', :method => :get)
+  = text_field_tag :address, nil, :placeholder => "#{@address_placehoder}"
+  = submit_tag "Search"
+  - if params[:address]
+    &nbsp;
+    = link_to 'reset', locations_path
+        
 = gmaps4rails(@json)
 
 - if params[:address].present? && @locations.blank?
