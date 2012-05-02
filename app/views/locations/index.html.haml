@@ -1,7 +1,7 @@
 %br/
 .row
   .span7
-    Welcome to Bay Area Resources. To get started, please enter your home address and then click 'Search' to see the resources near you.
+    Welcome to Bay Area Resources. To get started, please enter your home address and then click 'Search' to see the resources near you.  You can filter your results by clicking the checkboxes in the left column below the map.
   .span5
     = form_tag('/locations', :method => :get)
     = text_field_tag :address, nil, :placeholder => "#{@address_placehoder}"
@@ -9,22 +9,36 @@
     - if params[:address]
       &nbsp;
       = link_to 'reset', locations_path
-        
+
+%br/        
 = gmaps4rails(@json)
 
 .row
-  .span3
-    %h3 Filter Your Results
+  .span4
+  
+    %h3 Categories
     %br/
-    %h4 Categories
+    %table
+      - for category in @categories
+        %tr
+          %td.top{:width=>'20px'}
+            = check_box_tag "[categories][#{category.id}]"
+          %td.top
+            = category.name
     %br/
-    - for category in @categories
-      = check_box_tag "[categories][#{category.id}]"
-      &nbsp;
-      = category.name
-      %br/
-      %br/
-  .span9
+    %br/
+    
+    %h3 Services
+    %br/
+    %table    
+      - for service in @services
+        %tr
+          %td.top{:width=>'20px'}
+            = check_box_tag "[services][#{service.id}]"
+          %td.top
+            = service.name
+
+  .span8
     - if params[:address].present? && @locations.blank?
       .alert.alert-error
         There are no results within 100 miles of your search - please try again.

@@ -2,6 +2,7 @@ class LocationsController < ApplicationController
   
   def index
     @categories = Category.all(:order=>:name)
+    @services = Service.all(:order=>:name)
     if params[:address].present?
       @locations = Location.near(params[:address], 100)
       @address_placehoder = params[:address]
