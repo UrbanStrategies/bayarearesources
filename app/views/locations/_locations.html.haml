@@ -1,0 +1,19 @@
+#locations
+  - if @locations.blank?
+    .alert.alert-error
+      There are no results within 100 miles of your search - please try again.
+  - else
+    == #{@locations.size} Results
+    %table.table
+      - @locations.each do |location|
+        %tr
+          %td
+            %h3
+              = location.try(:organization).try(:name)
+            = location.gmaps4rails_address
+          %td{:width=>'90px'}
+            - if location.respond_to?(:distance)
+              = location.try(:distance).try(:slice, 0..3)
+              miles
+          %td{:width=>'80px'}
+            = link_to 'More Info', location_path(location), :class => 'btn btn-primary'

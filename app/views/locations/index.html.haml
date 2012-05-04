@@ -8,21 +8,20 @@
     = submit_tag "Search"
     - if params[:address]
       &nbsp;
-      = link_to 'reset', locations_path
+      = link_to 'reset', locations_path(:address => '')
 
-%br/        
+%br/
 = gmaps4rails(@json)
 
 .row
   .span4
-  
     %h3 Categories
     %br/
     %table
       - for category in @categories
         %tr
           %td.top{:width=>'20px'}
-            = check_box_tag "[categories][#{category.id}]"
+            = check_box_tag "category_#{category.id}", true, session[:category_ids].include?(category.id), :class => 'category_checkbox'
           %td.top
             = category.name
     %br/
@@ -39,20 +38,19 @@
             = service.name
 
   .span8
-    - if params[:address].present? && @locations.blank?
-      .alert.alert-error
-        There are no results within 100 miles of your search - please try again.
-    - else
-      %table.table
-        - @locations.each do |location|
-          %tr
-            %td
-              %h3
-                = location.try(:organization).try(:name)
-              = location.gmaps4rails_address
-            %td{:width=>'90px'}
-              - if params[:address].present?
-                = location.try(:distance).try(:slice, 0..3)
-                miles
-            %td{:width=>'80px'}
-              = link_to 'More Info', location_path(location), :class => 'btn btn-primary'
+    = render :partial => 'locations'
+      
+= debug session
+      
+- content_for :scripts do
+  %script
+    $(function() {
+    $(".category_checkbox").click(function() {
+    var ID = this.id.split("_")[1];
+    if ($('#' + this.id).is(':checked')) { 
+    $.get("/locations.js", {"add_category":ID});
+    } else { 
+    $.get("/locations.js", {"remove_category":ID});
+    }
+    })
+    })

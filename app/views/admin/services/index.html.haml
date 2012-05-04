@@ -10,4 +10,4 @@
       %td{:width=>'50px'}= link_to 'Delete', admin_category_service_path(@category, service), :confirm => "Delete '#{service.name}?'", :method => :delete, :class => 'btn btn-mini btn-danger'
 
 %br/
-= link_to "New #{@category.name} Service", new_admin_category_service_path(@category), :class => 'btn btn-large btn-success'
+= link_to "New '#{@category.name}' Service", new_admin_category_service_path(@category), :class => 'btn btn-large btn-success'
