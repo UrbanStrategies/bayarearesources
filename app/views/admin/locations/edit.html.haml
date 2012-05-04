@@ -1,5 +1,7 @@
 %h1.header
-  == #{@organization.try(:name)} - #{@location.address}
+  = @organization.try(:name)
+  %br/
+  %small= @location.address
 
 = form_for( :location, :url => admin_organization_location_path(@organization, @location), :html => {:method => :put}) do |f|
   = render :partial => 'form', :locals => {:f => f}

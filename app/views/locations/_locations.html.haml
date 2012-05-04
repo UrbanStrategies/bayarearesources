@@ -10,7 +10,7 @@
           %td
             %h3
               = location.try(:organization).try(:name)
-            = location.gmaps4rails_address
+            = location.full_address
           %td{:width=>'90px'}
             - if location.respond_to?(:distance)
               = location.try(:distance).try(:slice, 0..3)
