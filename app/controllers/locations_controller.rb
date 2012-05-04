@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   def index
     @categories = Category.all(:order=>:name)
     @services = Service.all(:order=>:name)
-    session[:category_ids] ||= []
+    session[:category_ids] ||= Category.all.collect {|x| x.id}
     session[:service_ids] ||= []
     
     # Address Locations
