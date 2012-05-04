@@ -41,14 +41,4 @@
     = render :partial => 'locations'
             
 - content_for :scripts do
-  %script
-    $(function() {
-    $(".category_checkbox").click(function() {
-    var ID = this.id.split("_")[1];
-    if ($('#' + this.id).is(':checked')) { 
-    $.get("/locations.js", {"add_category":ID});
-    } else { 
-    $.get("/locations.js", {"remove_category":ID});
-    }
-    })
-    })
+  = render :partial => 'checkbox_script'
