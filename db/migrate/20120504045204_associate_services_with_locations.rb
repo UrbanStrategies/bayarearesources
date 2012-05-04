@@ -1,0 +1,55 @@
+class AssociateServicesWithLocations < ActiveRecord::Migration
+  def up
+    [
+      [0, 1, 'Identity Theft Issues'],
+      [1, 1, 'Financial Education & Management', 'Group or one-on-one education on financial best-practices & money management techniques'],
+      [2, 1, 'Financial Counseling & Planning', 'Review of financial situation & any employment, immigration, legal, or family matters affecting such situation & requiring assistance. One-on-one or small group counseling, problem-solving & planning to help meet client''s financial goals'],
+      [3, 1, 'Basic Budgeting', 'Creating individual & family budgets to help maximize income, meet payment obligations, & save money'],
+      [4, 9, 'Banking Product Training', 'Assistance & support in the use of banking products such as pre-paid debit cards, checking accounts, savings accounts, & credit products'],
+      [5, 9, 'Checking Account Enrollment'],
+      [6, 9, 'Savings Account Enrollment'],
+      [7, 9, 'Pre-Paid Debit Card Enrollment'],
+      [8, 9, 'Low-interest Loan Enrollment'],
+      [9, 1, 'Other'],
+      [21, 2, 'Benefits Enrollment', 'Assistance with & enrollment in income support programs such as Food Stamps, Medi-Cal, & the self-sufficiency calculator'],
+      [22, 2, 'Utility Subsidies', 'Assistance in application for utility subsidies such as PG&E, telephone, & car insurance discounts for low-income families'],
+      [23, 2, 'Childcare Enrollment', 'Identification of & enrollment in quality, affordable, & accessible childcare that meets family needs'],
+      [24, 2, 'Transportation', 'Assistance in addressing transportation needs including enrollment in reduced fare programs for public transit, & budgeting for automobile purchase & upkeep'],
+      [25, 2, 'Social Services', 'May include domestic violence services & counseling, prisoner re-entry programs, child protection, homeless services, & other family support programs'],
+      [26, 2, 'Tax Preparation & EITC', 'Volunteer Income Tax Assistance [VITA] sites perform free tax preparation for low-income people & assistance in determining eligibility for tax credits such as the Earned Income Tax Credit & the Child Tax Credit'],
+      [27, 2, 'Other'],
+      [31, 3, 'Employment Readiness & Training', 'Career & job specific training, resume building, job search assistance, interview preparation or other assistance in employment readiness'],
+      [32, 3, 'Job Placement', 'Connection with employers & support in pre- & post- employment process. Assistance in obtaining jobs with sustainable wages & good benefits'],
+      [33, 3, 'Workplace Rights', 'Advocacy in employee-employer disputes, education about worker rights, worker safety trainings, assistance in filing grievances, facilitate connection to labor unions or other worker-rights organizations'],
+      [34, 3, 'Other'],
+      [35, 3, 'Free Tax Preparation'],
+      [41, 4, 'Credit Repair Counseling', 'Guidance in improving credit scores & paying down debt'],
+      [42, 4, 'Debt & Bankruptcy Counseling', 'Guidance in paying down debt & decision-making regarding filing for bankruptcy'],
+      [43, 4, 'Child Support & Other Payments', 'Assistance in planning for child support payments & collections, liaison with Department of Child Support Services'],
+      [44, 4, 'Other'],
+      [45, 4, 'Emergency Loans'],
+      [46, 4, 'Identity Theft'],
+      [51, 5, 'IDAs & Matched Savings', 'IDAs are matched saving accounts most often for the purpose of home ownership, higher education, or small business start-up. Most IDAs are matched at a rate of $2 for every $1 a client saves with varying requirements for the savings goal'],
+      [52, 5, 'Retirement Planning', 'Budgeting, financial planning, & investing to save for retirement'],
+      [53, 5, 'Investments', 'Identifying opportunities for financial savings in retirement accounts or other ventures to build assets'],
+      [54, 5, 'Other'],
+      [55, 5, 'Financing Education'],
+      [56, 5, 'Small Business Development'],
+      [61, 6, 'Home-Rental Assistance', 'Determining affordability & eligibility for subsidies; locating available units, rental application assistance'],
+      [62, 6, 'Home-Ownership Assistance', 'Planning & saving, determining affordability, acquiring financial assistance [e.g. first-time homebuyer grants], loan application & negotiation for fair loan terms, & other pre-purchase counseling for home-ownership'],
+      [63, 6, 'Foreclosure Prevention & Counseling', 'Counseling & planning for payments & loan terms in order to help prevent foreclosure'],
+      [64, 6, 'Other'],
+      [71, 7, 'Immigration', 'Legal & advocacy assistance in all matters pertaining to immigrant rights, status, & applications'],
+      [72, 7, 'Tenant Rights', 'Legal & advocacy services to tenants'],
+      [73, 7, 'Foreclosure'],
+      [74, 7, 'Other'],
+      [81, 8, 'Predatory Lending', 'Information about predatory financial products & services [e.g. payday loans, check cashing, sub-prime loans] including non-predatory alternatives. Advocacy for victims of predatory financial practices'],
+      [82, 8, 'Community Economic Development', 'Education on the relationship between residents, business, development, & government; how people can invest back into their communities & participate in processes that affect their families & neighbors'],
+      [83, 8, 'Other'],
+      [90, 9, 'Small business loan']
+    ].each do |row|
+      service = Service.find_by_name(row[2])
+      service.update_attribute(:service_id, row[0]) if service.present?
+    end
+  end
+end
