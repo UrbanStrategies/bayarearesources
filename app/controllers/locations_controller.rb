@@ -24,10 +24,9 @@ class LocationsController < ApplicationController
     # Address Locations
     
     if params[:address].present?
-      @address_placehoder = params[:address]
+      logger.info "------------------------------ MILES #{params[:miles]}"
       @locations = Location.where('id IN (?)', category_location_ids).near(params[:address], params[:miles])
     else
-      @address_placehoder = 'Your Address' 
       @locations = Location.find(category_location_ids)
     end
         

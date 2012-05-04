@@ -1,7 +1,7 @@
 #locations
   - if @locations.blank?
     .alert.alert-error
-      There are no results within 100 miles of your search - please try again.
+      == There are no results within #{params[:miles]} miles of your search - please try again.
   - else
     == #{@locations.size} Results
     %table.table
