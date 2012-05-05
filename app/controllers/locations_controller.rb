@@ -3,7 +3,9 @@ class LocationsController < ApplicationController
   def index
     @categories = Category.all(:order=>:name)
     @services = Service.all(:order=>:name)
-    params[:miles] ||= 10
+    if params[:miles].blank? || params[:miles] == 'Distance'
+      params[:miles] = 10
+    end
     
     
     if params[:address].present?
