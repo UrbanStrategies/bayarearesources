@@ -3,17 +3,18 @@ class LocationsController < ApplicationController
   def index
     @categories = Category.all(:order=>:name)
     @services = Service.all(:order=>:name)
-    if params[:miles].blank? || params[:miles] == 'Distance'
-      params[:miles] = 10
-    end
-    
+    params[:miles] = 10 if params[:miles].blank? || params[:miles] == 'Distance'  
     
     if params[:address].present?
       @locations = Location.near(params[:address], params[:miles])
     else
       @locations = Location.all(:order => :name)
     end
-        
+    
+    if session[:category_ids].blank?
+      session[:category_ids] = Category.all.collect {|x| x.id}
+    end
+    
     @json = @locations.to_gmaps4rails
     
     respond_to do |format|

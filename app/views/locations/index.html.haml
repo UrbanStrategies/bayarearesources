@@ -7,10 +7,7 @@
     = text_field_tag :address, nil, :placeholder => "Your Address"
     = select_tag :miles, options_for_select([[1],[2],[3],[4],[5],[10],[20],[30],[40],[50]]), :prompt => "Distance"
     = submit_tag "Search"
-    - if params[:address]
-      &nbsp;
-      = link_to 'reset', locations_path(:address => '')
-
+    
 %br/
 = gmaps4rails(@json)
 
