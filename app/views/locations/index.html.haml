@@ -15,7 +15,14 @@
 = gmaps4rails(@json)
 
 .row
-  .span4
+  .span8
+    #locations
+      = render :partial => 'locations'
+  
+  .span1
+    &nbsp;
+  
+  .span3
     %h3 Categories
     %br/
     %table
@@ -37,9 +44,8 @@
             = check_box_tag "[services][#{service.id}]"
           %td.top
             = service.name
-
-  .span8
-    = render :partial => 'locations'
+      
+= debug session
             
 - content_for :scripts do
   = render :partial => 'checkbox_script'

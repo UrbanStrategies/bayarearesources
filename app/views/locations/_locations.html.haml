@@ -1,19 +1,17 @@
-#locations
-  - if @locations.blank?
-    .alert.alert-error
-      == There are no results within #{params[:miles]} miles of your search - please try again.
-  - else
-    == #{@locations.size} Results
-    %table.table
-      - @locations.each do |location|
-        %tr
-          %td
-            %h3
-              = location.try(:organization).try(:name)
-            = location.full_address
-          %td{:width=>'90px'}
-            - if location.respond_to?(:distance)
-              = location.try(:distance).try(:slice, 0..3)
-              miles
-          %td{:width=>'80px'}
-            = link_to 'More Info', location_path(location), :class => 'btn btn-primary'
+- if @locations.blank?
+  .alert.alert-error
+    == There are no results within #{params[:miles]} miles of your search - please try again.
+- else
+  %table.table
+    - @locations.each do |location|
+      %tr{:id=>"location_#{location.id}"}
+        %td
+          %h3
+            = location.try(:organization).try(:name)
+          = location.full_address
+        %td{:width=>'90px'}
+          - if location.respond_to?(:distance)
+            = location.try(:distance).try(:slice, 0..3)
+            miles
+        %td{:width=>'80px'}
+          = link_to 'More Info', location_path(location), :class => 'btn btn-primary'

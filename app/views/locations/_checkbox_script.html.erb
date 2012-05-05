@@ -3,9 +3,9 @@
   $(".category_checkbox").click(function() {
     var ID = this.id.split("_")[1];
     if ($('#' + this.id).is(':checked')) { 
-      $.get("/locations.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"add_category":ID});
+      $.get("/locations/show_category.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
     } else { 
-      $.get("/locations.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"remove_category":ID});
+      $.get("/locations/hide_category.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
     }
     })
   })
