@@ -33,12 +33,8 @@ class LocationsController < ApplicationController
     session[:category_ids] << params[:category_id].to_i
     session[:category_ids].try(:uniq!)
     
-    category_location_ids = []
-    Category.find(params[:category_id]).locations.each do |location|
-      category_location_ids << location.id
-    end
+    @location_ids = Category.find(params[:category_id]).locations.collect {|x| x.id}.try(:flatten).try(:uniq)
     
-    @location_ids = category_location_ids.try(:flatten).try(:uniq)
     logger.info "-------------- showing location ids #{@location_ids}"
     
     respond_to do |format|
@@ -49,15 +45,17 @@ class LocationsController < ApplicationController
   def hide_category
     session[:category_ids].delete(params[:category_id].to_i)
     
-    all_location_ids = Location.all.collect {|x| x.id}
+    category_location_ids = Category.find(params[:category_id]).locations.collect {|x| x.id}.try(:uniq)
     
-    session_category_location_ids = []
-    session[:category_ids].each do |cat_id|
-      session_category_location_ids << Category.find(cat_id).locations.collect {|x| x.id}
+    session_location_ids = []
+    Category.where('id IN (?)', session[:category_ids]).each do |cat|
+      session_location_ids << cat.locations.collect {|x| x.id}
     end
-    session_category_location_ids.try(:flatten!).try(:uniq!)    
+    session_location_ids.try(:flatten!).try(:uniq!)
     
-    @location_ids = all_location_ids - session_category_location_ids
+    logger.info "-------------- don't hide these ids #{session_location_ids}"
+    
+    @location_ids = category_location_ids - session_location_ids
     logger.info "-------------- hiding location ids #{@location_ids}"
     
     respond_to do |format|

@@ -38,9 +38,14 @@
       - for service in @services
         %tr
           %td.top{:width=>'20px'}
-            = check_box_tag "[services][#{service.id}]"
+            = check_box_tag "[services][#{service.id}]", true, session[:service_ids].include?(service.id), :class => 'service_checkbox'
           %td.top
             = service.name
                         
 - content_for :scripts do
   = render :partial => 'checkbox_script'
+  %script
+    $(document).ready(function() {
+    $('.category_checkbox').each(function() { $(this).prop('checked', 'checked');});
+    $('.service_checkbox').each(function() { $(this).prop('checked', 'checked');});
+    });
