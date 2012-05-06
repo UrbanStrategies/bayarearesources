@@ -11,9 +11,7 @@ class LocationsController < ApplicationController
       @locations = Location.all(:order => :name)
     end
     
-    if session[:category_ids].blank?
-      session[:category_ids] = Category.all.collect {|x| x.id}
-    end
+    session[:category_ids] = Category.all.collect {|x| x.id}
     
     @json = @locations.to_gmaps4rails
     
