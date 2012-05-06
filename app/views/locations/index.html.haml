@@ -41,8 +41,6 @@
             = check_box_tag "[services][#{service.id}]"
           %td.top
             = service.name
-      
-= debug session
-            
+                        
 - content_for :scripts do
   = render :partial => 'checkbox_script'
