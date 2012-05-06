@@ -2,7 +2,6 @@
   .alert.alert-error
     == There are no results within #{params[:miles]} miles of your search - please try again.
 - else
-  = @locations.size
   %table.table
     - @locations.each do |location|
       %tr{:id=>"location_#{location.id}", :class=>"location_listing"}
