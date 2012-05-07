@@ -1,6 +1,0 @@
-%tr
-  %td{:width=>'20px'}
-  %td.top{:width=>'20px'}
-    = check_box_tag "service_#{service.id}", true, session[:service_ids].include?(service.id), :class => "category_#{category.id}_service_checkbox service_checkbox"
-  %td.top
-    = service.name

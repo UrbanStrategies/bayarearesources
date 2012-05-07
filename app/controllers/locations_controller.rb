@@ -88,8 +88,10 @@ class LocationsController < ApplicationController
     
     session[:service_ids].delete(params[:service_id].to_i)
     
+    # find the locations associated with this service, which we want to hide
     service_location_ids = @service.locations.collect {|x| x.id}.try(:uniq)
     
+    # find the locations that are associated to the services in the session, which we want to keep
     session_location_ids = []
     Service.where('id IN (?)', session[:service_ids]).each do |service|
       session_location_ids << service.locations.collect {|x| x.id}
@@ -97,7 +99,8 @@ class LocationsController < ApplicationController
     session_location_ids.try(:flatten!).try(:uniq!)
     
     @location_ids = service_location_ids - session_location_ids
-
+    
+    logger.info "-------------- service_ids in the session #{session[:service_ids]}"
     logger.info "-------------- don't hide these ids #{session_location_ids}"
     logger.info "-------------- hiding location ids #{@location_ids}"
     
