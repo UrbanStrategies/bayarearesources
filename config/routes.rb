@@ -5,6 +5,8 @@ Bayarearesources::Application.routes.draw do
   resources :locations, :only => [:index, :show] do 
     get 'show_category', :on => :collection
     get 'hide_category', :on => :collection
+    get 'show_service', :on => :collection
+    get 'hide_service', :on => :collection
   end
   resources :services
   devise_for :users

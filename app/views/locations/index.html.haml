@@ -5,7 +5,7 @@
   .span5
     = form_tag('/locations', :method => :get)
     = text_field_tag :address, nil, :placeholder => "Your Address"
-    = select_tag :miles, options_for_select([[1],[2],[3],[4],[5],[10],[20],[30],[40],[50]]), :prompt => "Distance"
+    = select_tag :miles, options_for_select([['1 mile', 1],['2 miles', 2],['3 miles', 3],['4 miles', 4],['5 miles', 5],['10 miles', 10],['20 miles', 20],['30 miles', 30],['40 miles', 40],['50 miles', 50]]), :prompt => "Distance"
     = submit_tag "Search"
     
 %br/
@@ -16,31 +16,13 @@
     #locations
       = render :partial => 'locations'
   
-  .span1
-    &nbsp;
-  
   .span3
-    %h3 Categories
+    %h3 Filter Services
     %br/
     %table
       - for category in @categories
-        %tr
-          %td.top{:width=>'20px'}
-            = check_box_tag "category_#{category.id}", true, session[:category_ids].include?(category.id), :class => 'category_checkbox'
-          %td.top
-            = category.name
-    %br/
-    %br/
-    
-    %h3 Services
-    %br/
-    %table    
-      - for service in @services
-        %tr
-          %td.top{:width=>'20px'}
-            = check_box_tag "[services][#{service.id}]", true, session[:service_ids].include?(service.id), :class => 'service_checkbox'
-          %td.top
-            = service.name
+        = render :partial => 'category', :locals => {:category => category}
+
                         
 - content_for :scripts do
   = render :partial => 'checkbox_script'

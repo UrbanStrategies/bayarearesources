@@ -1,3 +1,6 @@
+$(".category_<%= @category.id %>_service_checkbox").each(function() { $(this).prop('checked', 'checked');});
+$("#category_<%= @category.id %>_services").show('normal');
+
 <% for id in @location_ids %>
   $("#location_<%= id %>").show('normal');
 <% end %>

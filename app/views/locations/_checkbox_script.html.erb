@@ -1,12 +1,24 @@
 <script>
   $(function() {
-  $(".category_checkbox").click(function() {
-    var ID = this.id.split("_")[1];
-    if ($('#' + this.id).is(':checked')) { 
-      $.get("/locations/show_category.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
-    } else { 
-      $.get("/locations/hide_category.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
-    }
-    })
-  })
+    $(".category_checkbox").click(function() {
+      var ID = this.id.split("_")[1];
+      if ($('#' + this.id).is(':checked')) { 
+        $.get("/locations/show_category.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
+      } else { 
+        $.get("/locations/hide_category.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
+      }
+    });
+  });
+</script>
+<script>  
+  $(function() {
+    $(".service_checkbox").click(function() {
+      var ID = this.id.split("_")[1];
+      if ($('#' + this.id).is(':checked')) { 
+        $.get("/locations/show_service.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"service_id":ID});
+      } else { 
+        $.get("/locations/hide_service.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"service_id":ID});
+      }
+    });
+  });
 </script>

@@ -12,6 +12,7 @@ class LocationsController < ApplicationController
     end
     
     session[:category_ids] = Category.all.collect {|x| x.id}
+    session[:service_ids] = Service.all.collect {|x| x.id}
     
     @json = @locations.to_gmaps4rails
     
@@ -29,11 +30,48 @@ class LocationsController < ApplicationController
     end
   end
   
+  # javascript functions
+  
   def show_category
+    @category = Category.find(params[:category_id])
+    
     session[:category_ids] << params[:category_id].to_i
     session[:category_ids].try(:uniq!)
     
-    @location_ids = Category.find(params[:category_id]).locations.collect {|x| x.id}.try(:flatten).try(:uniq)
+    @location_ids = @category.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
+        
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def hide_category
+    @category = Category.find(params[:category_id])
+    
+    session[:category_ids].delete(params[:category_id].to_i)
+    
+    category_location_ids = @category.locations.collect {|x| x.id}.try(:uniq)
+    
+    session_location_ids = []
+    Category.where('id IN (?)', session[:category_ids]).each do |cat|
+      session_location_ids << cat.locations.collect {|x| x.id}
+    end
+    session_location_ids.try(:flatten!).try(:uniq!)
+    
+    @location_ids = category_location_ids - session_location_ids
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def show_service
+    @service = Service.find(params[:service_id])
+    
+    session[:service_ids] << params[:service_id].to_i
+    session[:service_ids].try(:uniq!)
+    
+    @location_ids = @service.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
     
     logger.info "-------------- showing location ids #{@location_ids}"
     
@@ -42,20 +80,22 @@ class LocationsController < ApplicationController
     end
   end
   
-  def hide_category
-    session[:category_ids].delete(params[:category_id].to_i)
+  def hide_service
+    @service = Service.find(params[:service_id])
     
-    category_location_ids = Category.find(params[:category_id]).locations.collect {|x| x.id}.try(:uniq)
+    session[:service_ids].delete(params[:service_id].to_i)
+    
+    service_location_ids = @service.locations.collect {|x| x.id}.try(:uniq)
     
     session_location_ids = []
-    Category.where('id IN (?)', session[:category_ids]).each do |cat|
-      session_location_ids << cat.locations.collect {|x| x.id}
+    Service.where('id IN (?)', session[:service_ids]).each do |service|
+      session_location_ids << service.locations.collect {|x| x.id}
     end
     session_location_ids.try(:flatten!).try(:uniq!)
     
     logger.info "-------------- don't hide these ids #{session_location_ids}"
     
-    @location_ids = category_location_ids - session_location_ids
+    @location_ids = service_location_ids - session_location_ids
     logger.info "-------------- hiding location ids #{@location_ids}"
     
     respond_to do |format|
