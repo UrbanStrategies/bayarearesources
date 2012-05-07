@@ -59,6 +59,9 @@ class LocationsController < ApplicationController
     session_location_ids.try(:flatten!).try(:uniq!)
     
     @location_ids = category_location_ids - session_location_ids
+
+    logger.info "-------------- don't hide these ids #{session_location_ids}"
+    logger.info "-------------- hiding location ids #{@location_ids}"
     
     respond_to do |format|
       format.js
@@ -93,9 +96,9 @@ class LocationsController < ApplicationController
     end
     session_location_ids.try(:flatten!).try(:uniq!)
     
-    logger.info "-------------- don't hide these ids #{session_location_ids}"
-    
     @location_ids = service_location_ids - session_location_ids
+
+    logger.info "-------------- don't hide these ids #{session_location_ids}"
     logger.info "-------------- hiding location ids #{@location_ids}"
     
     respond_to do |format|
