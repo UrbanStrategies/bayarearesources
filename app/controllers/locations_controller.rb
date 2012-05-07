@@ -30,13 +30,14 @@ class LocationsController < ApplicationController
     end
   end
   
-  # javascript functions
+  ####### javascript functions #######
   
   def show_category
     @category = Category.find(params[:category_id])
     
-    session[:category_ids] << params[:category_id].to_i
-    session[:category_ids].try(:uniq!)
+    session[:category_ids] << @category.id unless session[:category_ids].include?(@category.id)
+
+    @category.services.each {|x| session[:service_ids] << x.id}
     
     @location_ids = @category.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
         
@@ -48,7 +49,8 @@ class LocationsController < ApplicationController
   def hide_category
     @category = Category.find(params[:category_id])
     
-    session[:category_ids].delete(params[:category_id].to_i)
+    session[:category_ids].delete(@category.id)
+    @category.services.each {|x| session[:service_ids].delete(x.id)}
     
     category_location_ids = @category.locations.collect {|x| x.id}.try(:uniq)
     
@@ -71,8 +73,7 @@ class LocationsController < ApplicationController
   def show_service
     @service = Service.find(params[:service_id])
     
-    session[:service_ids] << params[:service_id].to_i
-    session[:service_ids].try(:uniq!)
+    session[:service_ids] << @service.id unless session[:service_ids].include?(@service.id)
     
     @location_ids = @service.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
     
@@ -86,7 +87,7 @@ class LocationsController < ApplicationController
   def hide_service
     @service = Service.find(params[:service_id])
     
-    session[:service_ids].delete(params[:service_id].to_i)
+    session[:service_ids].delete(@service.id)
     
     # find the locations associated with this service, which we want to hide
     service_location_ids = @service.locations.collect {|x| x.id}.try(:uniq)
