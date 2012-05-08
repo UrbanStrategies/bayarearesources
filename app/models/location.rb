@@ -12,6 +12,18 @@ class Location < ActiveRecord::Base
   after_validation :geocode
   
   def full_address
-    [address, city, zipcode].compact.join(', ')
+    [address, city, 'CA', zipcode].compact.join(', ')
+  end
+  
+  def gmaps4rails_infowindow
+    "<strong>#{self.try(:organization).try(:name)}</strong>
+    <br />
+    #{self.address}
+    <br />
+    #{self.city}, CA #{self.zipcode}
+    <br />
+    #{self.phone}
+    <br />
+    <a href='mailto:#{self.email}'>#{self.email}</a>"
   end
 end
