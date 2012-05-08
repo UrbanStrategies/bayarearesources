@@ -1,6 +1,8 @@
 class Location < ActiveRecord::Base
   belongs_to :organization
   has_and_belongs_to_many :services
+  belongs_to :county
+  
   
   acts_as_gmappable :address => :full_address
   geocoded_by :full_address

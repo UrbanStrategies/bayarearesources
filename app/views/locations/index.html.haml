@@ -17,8 +17,15 @@
       = render :partial => 'locations'
   
   #filters.span3.well
-    %h3 Filter Services
-    %br/
+    %h2 Filter Results
+    - unless @counties.blank?
+      %h3.filter-title
+        Counties
+      %table
+        = render :partial => 'county', :collection => @counties
+        
+    %h3.filter-title
+      Services
     %table
       - for category in @categories
         = render :partial => 'category', :locals => {:category => category}
@@ -28,6 +35,7 @@
   = render :partial => 'checkbox_script'
   %script
     $(document).ready(function() {
+    $('.county_checkbox').each(function() { $(this).prop('checked', 'checked');});
     $('.category_checkbox').each(function() { $(this).prop('checked', 'checked');});
     $('.service_checkbox').each(function() { $(this).prop('checked', 'checked');});
     });
