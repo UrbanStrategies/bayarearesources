@@ -16,14 +16,6 @@ class Location < ActiveRecord::Base
   end
   
   def gmaps4rails_infowindow
-    "<strong>#{self.try(:organization).try(:name)}</strong>
-    <br />
-    #{self.address}
-    <br />
-    #{self.city}, CA #{self.zipcode}
-    <br />
-    #{self.phone}
-    <br />
-    <a href='mailto:#{self.email}'>#{self.email}</a>"
+    "<strong>#{self.try(:organization).try(:name)}</strong><br />#{self.address}<br />#{self.city}, CA #{self.zipcode}<br />#{self.phone}<br /><a href='mailto:#{self.email}'>#{self.email}</a>"
   end
 end
