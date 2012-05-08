@@ -1,7 +1,4 @@
 Bayarearesources::Application.routes.draw do
-  
-  resources :counties
-
   root :to => 'locations#index'   
   
   resources :locations, :only => [:index, :show] do 
@@ -18,6 +15,7 @@ Bayarearesources::Application.routes.draw do
   
   match '/admin/' => 'admin/organizations#index'
   namespace :admin do
+    resources :counties
     resources :categories do
       resources :services
     end

@@ -1,0 +1,14 @@
+%h1.header
+  Counties
+
+%table.table
+  - @counties.each do |county|
+    %tr
+      %td
+        %h3= county.name
+
+      %td{:width=>'40px'}= link_to 'Edit', edit_admin_county_path(county), :class => 'btn btn-mini'
+      %td{:width=>'50px'}= link_to 'Delete', admin_county_path(county), :confirm => "Delete #{county.name}?", :method => :delete, :class => 'btn btn-mini btn-danger'
+
+%br/
+= link_to 'New County', new_admin_county_path, :class => 'btn btn-large btn-success'
