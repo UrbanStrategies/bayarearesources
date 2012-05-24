@@ -7,11 +7,9 @@
       %tr{:id=>"location_#{location.id}", :class=>"location_listing"}
         %td
           %h3
-            = location.try(:organization).try(:name)
+            = link_to location.try(:organization).try(:name), location_path(location)
           = location.full_address
         %td{:width=>'90px'}
           - if location.respond_to?(:distance)
             = location.try(:distance).try(:slice, 0..3)
             miles
-        %td{:width=>'80px'}
-          = link_to 'More Info', location_path(location), :class => 'btn btn-primary'
