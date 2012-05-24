@@ -11,6 +11,8 @@ class Location < ActiveRecord::Base
   
   after_validation :geocode
   
+  validates :organization_id, :presence => true
+  
   def org_name
     if organization.present?
       self.organization.name
