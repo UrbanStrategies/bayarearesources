@@ -4,7 +4,7 @@
     Welcome to Bay Area Resources. To get started, please enter your home address and then click 'Search' to see the resources near you.  You can also filter your results by clicking the checkboxes in the left column below the map.
   .span5
     = form_tag('/locations', :method => :get)
-    = text_field_tag :address, nil, :placeholder => "Your Address"
+    = text_field_tag :address, nil, :placeholder => @address
     = select_tag :miles, options_for_select([['1 mile', 1],['2 miles', 2],['3 miles', 3],['4 miles', 4],['5 miles', 5],['10 miles', 10],['20 miles', 20],['30 miles', 30],['40 miles', 40],['50 miles', 50]]), :prompt => "Distance"
     = submit_tag "Search"
     
