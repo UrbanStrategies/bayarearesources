@@ -11,6 +11,14 @@ class Location < ActiveRecord::Base
   
   after_validation :geocode
   
+  def org_name
+    if organization.present?
+      self.organization.name
+    else
+      ''
+    end
+  end
+  
   def full_address
     [address, city, 'CA', zipcode].compact.join(', ')
   end

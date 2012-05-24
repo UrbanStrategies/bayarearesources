@@ -9,7 +9,8 @@ class LocationsController < ApplicationController
     if params[:address].present?
       @locations = Location.near(params[:address], params[:miles])
     else
-      @locations = Location.all(:order => :name)
+      locations = Location.all
+      @locations = locations.sort_by(&:org_name)
     end
     
     session[:county_ids]    = County.all.collect {|x| x.id}
