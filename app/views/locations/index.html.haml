@@ -13,6 +13,8 @@
 
 .row
   .span8
+    #results_count
+      = render :partial => 'results_count'
     #locations
       = render :partial => 'locations'
   
@@ -33,9 +35,3 @@
                         
 - content_for :scripts do
   = render :partial => 'checkbox_script'
-  %script
-    $(document).ready(function() {
-    $('.county_checkbox').each(function() { $(this).prop('checked', 'checked');});
-    $('.category_checkbox').each(function() { $(this).prop('checked', 'checked');});
-    $('.service_checkbox').each(function() { $(this).prop('checked', 'checked');});
-    });

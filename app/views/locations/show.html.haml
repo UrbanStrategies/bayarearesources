@@ -1,59 +1,83 @@
 %h1= @location.try(:organization).try(:name)
 
-= gmaps4rails(@json)
+.row
+  .span6
+    %br/
+    == #{@location.full_address}
+    %br/
+    = @location.phone
+    %br/
+    = @location.fax
+    %br/
+    = mail_to @location.email, @location.email
+    %br/
+    %br/
 
-%h3 Address
-== #{@location.full_address}
-%br/
-%br/
+    - if @location.hours.present?
+      %h3 Hours
+      = @location.hours
+      %br/
+      %br/
+    
+    - if @location.organization.try(:population)
+      %div
+        %h3 Population Served
+        = @location.organization.population
+      %br/
 
-%h3 Contact Info
-= @location.phone
-%br/
-= @location.fax
-%br/
-= mail_to @location.email, @location.email
-%br/
-%br/
+    - if @location.directions.present?
+      %h3 Directions
+      = @location.directions
+      %br/
+      %br/
 
-%h3 Hours
-= @location.hours
-%br/
-%br/
-
-%h3 Directions
-= @location.directions
-%br/
-%br/
-
-%table
-  %tr
-    %td{:width=>'200px'} Wheelchair Accessible:
-    %td= @location.wheelchair_accessible
-  %tr
-    %td BART Accessible:
-    %td= @location.bart_accessible
-  %tr
-    %td MUNI Bus Accessible:
-    %td= @location.muni_bus_accessible
-  %tr
-    %td MUNI Train Accessible:
-    %td= @location.muni_train_accessible
-  %tr
-    %td AC Bus Accessible:
-    %td= @location.ac_bus_accessible
-  %tr
-    %td Free Parking:
-    %td= @location.free_parking
-  %tr
-    %td Parking Meters:
-    %td= @location.parking_meters
-  %tr
-    %td Paid Parking Lot:
-    %td= @location.paid_parking_lot
-  %tr
-    %td Free Street Parking:
-    %td= @location.free_street_parking
-  %tr
-    %td Parking Fees:
-    %td= @location.parking_fees
+    - if @location.services.present?
+      %h3 Services
+      - for service in @location.services
+        = service.name
+        %br/
+      %br/
+    
+    %h3 Accessibility
+    %table
+      %tr
+        %td{:width=>'200px'} Wheelchair Accessible:
+        %td= @location.wheelchair_accessible
+      %tr
+        %td BART Accessible:
+        %td= @location.bart_accessible
+      %tr
+        %td MUNI Bus Accessible:
+        %td= @location.muni_bus_accessible
+      %tr
+        %td MUNI Train Accessible:
+        %td= @location.muni_train_accessible
+      %tr
+        %td AC Bus Accessible:
+        %td= @location.ac_bus_accessible
+      %tr
+        %td Free Parking:
+        %td= @location.free_parking
+      %tr
+        %td Parking Meters:
+        %td= @location.parking_meters
+      %tr
+        %td Paid Parking Lot:
+        %td= @location.paid_parking_lot
+      %tr
+        %td Free Street Parking:
+        %td= @location.free_street_parking
+      %tr
+        %td Parking Fees:
+        %td= @location.parking_fees
+    
+    - if @location.organization.try(:locations).try(:size).try(:>, 1)
+      %br/
+      %h3 Other Locations
+      - @location.organization.locations.each do |location|
+        - unless location == @location
+          = link_to location.address, location_path(location)
+          %br/
+      
+  .span5
+    = gmaps("markers" => {'data' => @json}, "map_options" => {"auto_zoom" => false, "zoom" => 16})

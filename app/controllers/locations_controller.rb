@@ -15,9 +15,10 @@ class LocationsController < ApplicationController
       @address = "Your Address"    
     end
     
-    session[:county_ids]    = County.all.collect {|x| x.id}
-    session[:category_ids]  = Category.all.collect {|x| x.id}
-    session[:service_ids]   = Service.all.collect {|x| x.id}
+    session[:county_ids]      = County.all.collect {|x| x.id}
+    session[:category_ids]    = Category.all.collect {|x| x.id}
+    session[:service_ids]     = Service.all.collect {|x| x.id}
+    session[:locations_count] = @locations.size
     
     @json = @locations.to_gmaps4rails
     
@@ -37,18 +38,6 @@ class LocationsController < ApplicationController
   
   ####### javascript functions #######
 
-  def show_county
-    @county = County.find(params[:county_id])
-    
-    session[:county_ids] << @county.id unless session[:county_ids].include?(@county.id)
-    
-    @location_ids = @county.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
-        
-    respond_to do |format|
-      format.js
-    end
-  end
-  
   def hide_county
     @county = County.find(params[:county_id])
     
@@ -65,6 +54,8 @@ class LocationsController < ApplicationController
     session_location_ids.try(:flatten!).try(:uniq!)
     
     @location_ids = county_location_ids - session_location_ids
+    
+    session[:locations_count] -= @location_ids.size
 
     logger.info "-------------- don't hide these ids #{session_location_ids}"
     logger.info "-------------- hiding location ids #{@location_ids}"
@@ -74,14 +65,13 @@ class LocationsController < ApplicationController
     end
   end
   
-  def show_category
-    @category = Category.find(params[:category_id])
+  def show_county
+    @county = County.find(params[:county_id])
     
-    session[:category_ids] << @category.id unless session[:category_ids].include?(@category.id)
-
-    @category.services.each {|x| session[:service_ids] << x.id}
+    session[:county_ids] << @county.id unless session[:county_ids].include?(@county.id)
     
-    @location_ids = @category.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
+    @location_ids = @county.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
+    session[:locations_count] += @location_ids.size
         
     respond_to do |format|
       format.js
@@ -105,10 +95,26 @@ class LocationsController < ApplicationController
     session_location_ids.try(:flatten!).try(:uniq!)
     
     @location_ids = category_location_ids - session_location_ids
-
+    session[:locations_count] -= @location_ids.size
+    
     logger.info "-------------- don't hide these ids #{session_location_ids}"
     logger.info "-------------- hiding location ids #{@location_ids}"
     
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def show_category
+    @category = Category.find(params[:category_id])
+    
+    session[:category_ids] << @category.id unless session[:category_ids].include?(@category.id)
+
+    @category.services.each {|x| session[:service_ids] << x.id}
+    
+    @location_ids = @category.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
+    session[:locations_count] += @location_ids.size
+        
     respond_to do |format|
       format.js
     end
@@ -120,6 +126,7 @@ class LocationsController < ApplicationController
     session[:service_ids] << @service.id unless session[:service_ids].include?(@service.id)
     
     @location_ids = @service.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
+    session[:locations_count] += @location_ids.size
     
     logger.info "-------------- showing location_ids #{@location_ids}"
     
@@ -144,6 +151,7 @@ class LocationsController < ApplicationController
     session_location_ids.try(:flatten!).try(:uniq!)
     
     @location_ids = service_location_ids - session_location_ids
+    session[:locations_count] -= @location_ids.size
     
     logger.info "-------------- service_ids in the session #{session[:service_ids]}"
     logger.info "-------------- don't hide these location_ids #{session_location_ids}"

@@ -41,15 +41,23 @@
             <span class="icon-bar"></span>
           </a>
           <%= link_to 'Bay Area Resources', root_url, :class => 'brand' %>
+          <ul class='nav'>
+            <li><%= link_to 'Home', root_url %></li>
+            <li><%= link_to 'About Us', page_path('about') %></li>
+            <li><%= link_to 'More Resources', page_path('more_resources') %></li>
+          </ul>
           <div class="nav-collapse pull-right">
+            <%= link_to image_tag('free-taxes.jpg'), 'http://earnitkeepitsaveit.org/' %>
+          
+            <!--
             <ul class="nav">
               <% if current_user %>
                 <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
               <% else %>
                 <li><%= link_to 'Sign In', new_user_session_path %></li>              
               <% end %>
-            </ul>
-          </div><!--/.nav-collapse -->
+            </ul> -->
+          </div>
         </div>
       </div>
     </div>
