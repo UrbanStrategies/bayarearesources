@@ -3,3 +3,4 @@
     = check_box_tag "county_#{county.id}", true, session[:county_ids].try(:include?, county.id), :class => 'county_checkbox'
   %td.top
     = county.name
+    == (#{county.locations.size})
