@@ -20,11 +20,6 @@
   
   #filters.span3.well
     %h2 Filter Results
-    - unless @counties.blank?
-      %h3.filter-title
-        Counties
-      %table
-        = render :partial => 'county', :collection => @counties
         
     %h3.filter-title
       Services
