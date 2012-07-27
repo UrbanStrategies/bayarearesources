@@ -9,8 +9,6 @@
     %h2 Overview
     %br/
     .field
-      = f.select :organization_id, options_from_collection_for_select(Organization.all(:order => :name), :id, :name)
-    .field
       = f.label :address
       = f.text_field :address
     .field

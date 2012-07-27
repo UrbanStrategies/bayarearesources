@@ -33,6 +33,7 @@ class Admin::LocationsController < ApplicationController
 
   def create
     @location = Location.new(params[:location])
+    @location.organization = @organization
 
     respond_to do |format|
       if @location.save
@@ -45,6 +46,7 @@ class Admin::LocationsController < ApplicationController
 
   def update
     @location = Location.find(params[:id])
+    params[:location][:organization_id] = @organization.id
     @services = []
     if params[:services].present?
       params[:services].each do |s|
