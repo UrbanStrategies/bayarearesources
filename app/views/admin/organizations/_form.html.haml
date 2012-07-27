@@ -4,56 +4,58 @@
     %ul
       - @organization.errors.full_messages.each do |msg|
         %li= msg
+.row
+  .span4
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :description
+      = f.text_area :description
+    .field
+      = f.label :address
+      = f.text_field :address
+    .field
+      = f.label :city
+      = f.text_field :city
+    .field
+      = f.label :county_id
+      = f.select :county_id, options_from_collection_for_select(County.all(:order => :name), :id, :name)
+    .field
+      = f.label :zipcode
+      = f.text_field :zipcode
+    .field
+      = f.label :latitude
+      = f.text_field :latitude
+    .field
+      = f.label :longitude
+      = f.text_field :longitude
+  .span4
+    .field
+      = f.label :phone
+      = f.text_field :phone
+    .field
+      = f.label :website
+      = f.text_field :website
+    .field
+      = f.label :email
+      = f.text_field :email
+    .field
+      = f.label :population
+      = f.text_area :population
+    .field
+      = f.label :goal_1
+      = f.text_field :goal_1
+    .field
+      = f.label :goal_2
+      = f.text_field :goal_2
+    .field
+      = f.label :goal_3
+      = f.text_field :goal_3
+    .field
+      = f.label :goal_4
+      = f.text_field :goal_4
 
-.field
-  = f.label :name
-  = f.text_field :name
-.field
-  = f.label :description
-  = f.text_area :description
-.field
-  = f.label :address
-  = f.text_field :address
-.field
-  = f.label :city
-  = f.text_field :city
-.field
-  = f.label :county_id
-  = f.select :county_id, options_from_collection_for_select(County.all(:order => :name), :id, :name)
-.field
-  = f.label :zipcode
-  = f.text_field :zipcode
-.field
-  = f.label :latitude
-  = f.text_field :latitude
-.field
-  = f.label :longitude
-  = f.text_field :longitude
-.field
-  = f.label :phone
-  = f.text_field :phone
-.field
-  = f.label :website
-  = f.text_field :website
-.field
-  = f.label :email
-  = f.text_field :email
-.field
-  = f.label :population
-  = f.text_area :population
-.field
-  = f.label :goal_1
-  = f.text_field :goal_1
-.field
-  = f.label :goal_2
-  = f.text_field :goal_2
-.field
-  = f.label :goal_3
-  = f.text_field :goal_3
-.field
-  = f.label :goal_4
-  = f.text_field :goal_4
-  
   
 .actions
   %br/
