@@ -16,7 +16,7 @@
       = f.text_field :city
     .field
       = f.label :county_id
-      = f.select :county_id, options_from_collection_for_select(County.all(:order => :name), :id, :name)
+      = f.select :county_id, options_from_collection_for_select(County.all(:order => :name), :id, :name, @location.county.try(:id))
     .field
       = f.label :zipcode
       = f.text_field :zipcode
