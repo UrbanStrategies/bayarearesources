@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   layout 'admin'
   before_filter :authenticate_user!
+  before_filter :load_organizations
   
   def index
     @users = User.all(:order => :email)
@@ -61,5 +62,9 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to admin_users_url }
     end
+  end
+
+  def load_organizations
+    @organizations = Organization.all(:order => :name)
   end
 end

@@ -4,6 +4,7 @@ gem 'rails', '3.2.3'
 gem 'pg', :group => [:production]
 gem 'geocoder'
 gem 'devise'
+gem 'cancan'
 gem 'haml-rails'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'high_voltage'

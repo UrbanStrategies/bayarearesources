@@ -3,12 +3,13 @@
 
 %table.table
   - @organizations.each do |organization|
-    %tr
-      %td
-        %h3= organization.name
-      %td{:width=>'85px'}= link_to "Locations (#{organization.locations.try(:size)})", admin_organization_locations_path(organization), :class => 'btn btn-mini'
-      %td{:width=>'40px'}= link_to 'Edit', edit_admin_organization_path(organization), :class => 'btn btn-mini'
-      %td{:width=>'50px'}= link_to 'Delete', admin_organization_path(organization), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
+    - if current_user.admin? || current_user.organizations.include?(organization)
+      %tr
+        %td
+          %h3= organization.name
+        %td{:width=>'85px'}= link_to "Locations (#{organization.locations.try(:size)})", admin_organization_locations_path(organization), :class => 'btn btn-mini'
+        %td{:width=>'40px'}= link_to 'Edit', edit_admin_organization_path(organization), :class => 'btn btn-mini'
+        %td{:width=>'50px'}= link_to 'Delete', admin_organization_path(organization), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
 
 %br/
 = link_to 'New Organization', new_admin_organization_path, :class => 'btn btn-large btn-success'

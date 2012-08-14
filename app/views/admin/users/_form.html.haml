@@ -6,6 +6,11 @@
         %li= msg
 
 .field
+  = f.check_box :admin
+  Admin
+  %br/
+  %br/
+.field
   = f.label :email
   = f.email_field :email
 .field
@@ -14,6 +19,14 @@
 .field
   = f.label :password_confirmation
   = f.password_field :password_confirmation
+
+%h3 Authorized Organizations
+%br/
+
+- for organization in @organizations
+  .field
+    = check_box_tag :organization_ids, organization.id, @user.organizations.include?(organization), :name => 'user[organization_ids][]'
+    = organization.name
 
 .actions
   %br/

@@ -42,10 +42,12 @@
           <%= link_to 'Bay Area Resources : Admin', root_url, :class => 'brand' %>
           <div class="nav-collapse pull-right">
             <ul class="nav">
-              <li><%= link_to 'Service Organizations', admin_organizations_path %></li>
-              <li><%= link_to 'Categories', admin_categories_path %></li>
-              <li><%= link_to 'Counties', admin_counties_path %></li>
-              <li><%= link_to 'Users', admin_users_path %></li>
+              <li><%= link_to 'Organizations & Locations', admin_organizations_path %></li>
+              <% if current_user.admin? %> 
+                <li><%= link_to 'Categories', admin_categories_path %></li>
+                <li><%= link_to 'Counties', admin_counties_path %></li>
+                <li><%= link_to 'Users', admin_users_path %></li>
+              <% end %>
               <li class='divider-vertical'></li>
               <% if current_user %>
                 <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
