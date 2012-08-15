@@ -1,6 +1,6 @@
 %tr
   %td.top{:width=>'20px'}
-    = check_box_tag "category_#{category.id}", true, session[:category_ids].try(:include?, category.id), :class => 'category_checkbox'
+    = check_box_tag "category_#{category.id}", false, session[:category_ids].try(:include?, category.id), :class => 'category_checkbox'
   %td.top
     = category.name
     == (#{category.locations.size})    

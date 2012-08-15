@@ -12,13 +12,16 @@ class LocationsController < ApplicationController
     else
       locations = Location.all
       @locations = locations.sort_by(&:org_name)
-      @address = "Your Address"    
+      @address = "Your Address"
     end
-    
-    session[:county_ids]      = County.all.collect {|x| x.id}
-    session[:category_ids]    = Category.all.collect {|x| x.id}
-    session[:service_ids]     = Service.all.collect {|x| x.id}
-    session[:locations_count] = @locations.size
+
+    session[:location_ids] = @locations.collect {|x| x.id}
+    session[:category_ids] = nil
+
+    # session[:county_ids]      ||= []
+    # session[:category_ids]    ||= []
+    # session[:service_ids]     ||= []
+    # session[:locations_count] ||= @locations.size
     
     @json = @locations.to_gmaps4rails
     
@@ -37,46 +40,6 @@ class LocationsController < ApplicationController
   end
   
   ####### javascript functions #######
-
-  def hide_county
-    @county = County.find(params[:county_id])
-    
-    session[:county_ids].delete(@county.id)
-    
-    # find the locations associated with this county, which we want to hide
-    county_location_ids = @county.locations.collect {|x| x.id}.try(:uniq)
-    
-    # find the locations that are associated to the counties in the session, which we want to keep
-    session_location_ids = []
-    County.where('id IN (?)', session[:county_ids]).each do |county|
-      session_location_ids << county.locations.collect {|x| x.id}
-    end
-    session_location_ids.try(:flatten!).try(:uniq!)
-    
-    @location_ids = county_location_ids - session_location_ids
-    
-    session[:locations_count] -= @location_ids.size
-
-    logger.info "-------------- don't hide these ids #{session_location_ids}"
-    logger.info "-------------- hiding location ids #{@location_ids}"
-    
-    respond_to do |format|
-      format.js
-    end
-  end
-  
-  def show_county
-    @county = County.find(params[:county_id])
-    
-    session[:county_ids] << @county.id unless session[:county_ids].include?(@county.id)
-    
-    @location_ids = @county.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
-    session[:locations_count] += @location_ids.size
-        
-    respond_to do |format|
-      format.js
-    end
-  end
   
   def hide_category
     @category = Category.find(params[:category_id])
@@ -107,56 +70,19 @@ class LocationsController < ApplicationController
   
   def show_category
     @category = Category.find(params[:category_id])
-    
+
+    if session[:category_ids].blank?
+      session[:category_ids] = []
+    end    
+
     session[:category_ids] << @category.id unless session[:category_ids].include?(@category.id)
 
     @category.services.each {|x| session[:service_ids] << x.id}
     
     @location_ids = @category.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
+    @hidden_location_ids = Location.all.collect {|x| x.id } - Category.find(session[:category_ids]).collect {|category| category.locations.collect {|x| x.id}}.flatten.uniq
     session[:locations_count] += @location_ids.size
         
-    respond_to do |format|
-      format.js
-    end
-  end
-  
-  def show_service
-    @service = Service.find(params[:service_id])
-    
-    session[:service_ids] << @service.id unless session[:service_ids].include?(@service.id)
-    
-    @location_ids = @service.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
-    session[:locations_count] += @location_ids.size
-    
-    logger.info "-------------- showing location_ids #{@location_ids}"
-    
-    respond_to do |format|
-      format.js
-    end
-  end
-  
-  def hide_service
-    @service = Service.find(params[:service_id])
-    
-    session[:service_ids].delete(@service.id)
-    
-    # find the locations associated with this service, which we want to hide
-    service_location_ids = @service.locations.collect {|x| x.id}.try(:uniq)
-    
-    # find the locations that are associated to the services in the session, which we want to keep
-    session_location_ids = []
-    Service.where('id IN (?)', session[:service_ids]).each do |service|
-      session_location_ids << service.locations.collect {|x| x.id}
-    end
-    session_location_ids.try(:flatten!).try(:uniq!)
-    
-    @location_ids = service_location_ids - session_location_ids
-    session[:locations_count] -= @location_ids.size
-    
-    logger.info "-------------- service_ids in the session #{session[:service_ids]}"
-    logger.info "-------------- don't hide these location_ids #{session_location_ids}"
-    logger.info "-------------- hiding location_ids #{@location_ids}"
-    
     respond_to do |format|
       format.js
     end

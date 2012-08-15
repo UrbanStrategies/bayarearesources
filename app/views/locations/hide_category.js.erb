@@ -1,5 +1,6 @@
 // $('#results_count').html("<%= escape_javascript(render('results_count')) %>");
-$("#category_<%= @category.id %>_services").hide('normal');
+// $("#category_<%= @category.id %>_services").hide('normal');
+
 <% for id in @location_ids %>
   $("#location_<%= id %>").hide('normal');
 <% end %>
