@@ -43,6 +43,13 @@
         - unless location == @location
           = link_to location.address, location_path(location)
           %br/
+    
+    - if @organization.try(:languages).try(:present?)
+      %br/
+      %h3 Languages
+      - for language in @organization.languages
+        = language.name
+        %br/
       
   .span5
     = gmaps("markers" => {'data' => @json}, "map_options" => {"auto_zoom" => false, "zoom" => 15})

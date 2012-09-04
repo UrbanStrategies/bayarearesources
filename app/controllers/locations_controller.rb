@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  
+
   def index
     @counties = County.all(:order => :name)
     @categories = Category.all(:order=>:name)
@@ -32,6 +32,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    @organization = @location.organization
     @json = @location.to_gmaps4rails
 
     respond_to do |format|
