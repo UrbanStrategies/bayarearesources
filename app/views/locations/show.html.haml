@@ -25,19 +25,33 @@
         = @location.organization.population
       %br/
 
+    - if @location.services.present?
+      %h3 Services
+      - for category in Category.all(:order => :name)
+        - if (@location.services && category.services).present?
+          %h4
+            = category.name
+          %ul
+            - for service in category.services
+              %li= service.name
+          %br/
+    
+    - if @location.organization.try(:locations).try(:size).try(:>, 1)
+      %br/
+      %h3 Other Locations
+      - @location.organization.locations.each do |location|
+        - unless location == @location
+          = link_to location.address, location_path(location)
+          %br/
+      
+  .span5
+    = gmaps("markers" => {'data' => @json}, "map_options" => {"auto_zoom" => false, "zoom" => 15})
     - if @location.directions.present?
       %h3 Directions
       = @location.directions
       %br/
       %br/
-
-    - if @location.services.present?
-      %h3 Services
-      - for service in @location.services
-        = service.name
-        %br/
-      %br/
-    
+  
     %h3 Accessibility
     %table
       %tr
@@ -55,6 +69,11 @@
       %tr
         %td AC Bus Accessible:
         %td= @location.ac_bus_accessible
+    
+      %tr
+        %td{:colspan=>2}
+          %br/
+          %h3 Parking
       %tr
         %td Free Parking:
         %td= @location.free_parking
@@ -70,14 +89,3 @@
       %tr
         %td Parking Fees:
         %td= @location.parking_fees
-    
-    - if @location.organization.try(:locations).try(:size).try(:>, 1)
-      %br/
-      %h3 Other Locations
-      - @location.organization.locations.each do |location|
-        - unless location == @location
-          = link_to location.address, location_path(location)
-          %br/
-      
-  .span5
-    = gmaps("markers" => {'data' => @json}, "map_options" => {"auto_zoom" => false, "zoom" => 15})
