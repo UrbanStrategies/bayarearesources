@@ -78,13 +78,17 @@
   .span4
     %h2 Services
     %br/
-    - for service in @services
-      .field
-        - if @location.services.include?(service)
-          = check_box_tag "[services][#{service.id}]", 1, true
-        - else
-          = check_box_tag "[services][#{service.id}]"
-        = service.name
+    - for category in Category.all(:order => :name)
+      - if category.services.present?
+        %h4= category.name
+        - for service in category.services
+          .field
+            - if @location.services.include?(service)
+              = check_box_tag "[services][#{service.id}]", 1, true
+            - else
+              = check_box_tag "[services][#{service.id}]"
+            = service.name
+        %br/
 
 .row
   .span12
