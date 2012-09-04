@@ -1,15 +1,18 @@
 %h1.header
   Organizations
 
-%table.table
-  - @organizations.each do |organization|
-    - if can? :manage, organization
-      %tr
-        %td
-          %h3= organization.name
-        %td{:width=>'85px'}= link_to "Locations (#{organization.locations.try(:size)})", admin_organization_locations_path(organization), :class => 'btn btn-mini'
-        %td{:width=>'40px'}= link_to 'Edit', edit_admin_organization_path(organization), :class => 'btn btn-mini'
-        %td{:width=>'50px'}= link_to 'Delete', admin_organization_path(organization), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
+- if @organizations.blank?
+  There are no organizations associated with this account.
+- else
+  %table.table
+    - @organizations.each do |organization|
+      - if can? :manage, organization
+        %tr
+          %td
+            %h3= organization.name
+          %td{:width=>'85px'}= link_to "Locations (#{organization.locations.try(:size)})", admin_organization_locations_path(organization), :class => 'btn btn-mini'
+          %td{:width=>'40px'}= link_to 'Edit', edit_admin_organization_path(organization), :class => 'btn btn-mini'
+          %td{:width=>'50px'}= link_to 'Delete', admin_organization_path(organization), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
 
 - if current_user.admin?
   %br/
