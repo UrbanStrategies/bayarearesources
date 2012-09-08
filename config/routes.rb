@@ -2,12 +2,10 @@ Bayarearesources::Application.routes.draw do
   root :to => 'locations#index'   
   
   resources :locations, :only => [:index, :show] do 
-    get 'show_county', :on => :collection
-    get 'hide_county', :on => :collection
     get 'show_category', :on => :collection
     get 'hide_category', :on => :collection
-    get 'show_service', :on => :collection
-    get 'hide_service', :on => :collection
+    get 'show_language', :on => :collection
+    get 'hide_language', :on => :collection
   end
   resources :services
   devise_for :users

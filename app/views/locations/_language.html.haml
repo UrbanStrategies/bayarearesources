@@ -1,0 +1,6 @@
+%tr
+  %td.top{:width=>'20px'}
+    = check_box_tag "language_#{language.id}", false, session[:language_ids].try(:include?, language.id), :class => 'language_checkbox'
+  %td.top
+    = language.name
+    == (#{language.locations.size})

@@ -13,25 +13,12 @@
 
 <script>  
   $(function() {
-    $(".service_checkbox").click(function() {
+    $(".language_checkbox").click(function() {
       var ID = this.id.split("_")[1];
       if ($('#' + this.id).is(':checked')) { 
-        $.get("/locations/show_service.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"service_id":ID});
+        $.get("/locations/show_language.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"language_id":ID});
       } else { 
-        $.get("/locations/hide_service.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"service_id":ID});
-      }
-    });
-  });
-</script>
-
-<script>  
-  $(function() {
-    $(".county_checkbox").click(function() {
-      var ID = this.id.split("_")[1];
-      if ($('#' + this.id).is(':checked')) { 
-        $.get("/locations/show_county.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"county_id":ID});
-      } else { 
-        $.get("/locations/hide_county.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"county_id":ID});
+        $.get("/locations/hide_language.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"language_id":ID});
       }
     });
   });

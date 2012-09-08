@@ -1,0 +1,7 @@
+<% for id in @hidden_location_ids %>
+  $("#location_<%= id %>").hide('normal');
+<% end %>
+
+<% for id in @location_ids %>
+  $("#location_<%= id %>").show('normal');
+<% end %>

@@ -3,6 +3,7 @@ class LocationsController < ApplicationController
   def index
     @counties = County.all(:order => :name)
     @categories = Category.all(:order=>:name)
+    @languages = Language.all(:order=>:name)
     @services = Service.all(:order=>:name)
     params[:miles] = 10 if params[:miles].blank? || params[:miles] == 'Distance'  
     
@@ -16,12 +17,8 @@ class LocationsController < ApplicationController
     end
 
     session[:location_ids] = @locations.collect {|x| x.id}
+    session[:language_ids] = nil
     session[:category_ids] = nil
-
-    # session[:county_ids]      ||= []
-    # session[:category_ids]    ||= []
-    # session[:service_ids]     ||= []
-    # session[:locations_count] ||= @locations.size
     
     @json = @locations.to_gmaps4rails
     
@@ -45,8 +42,8 @@ class LocationsController < ApplicationController
   def hide_category
     @category = Category.find(params[:category_id])
     
+    # remove the category_id from the session
     session[:category_ids].delete(@category.id)
-    @category.services.each {|x| session[:service_ids].delete(x.id)}
     
     # find the locations associated with this category, which we want to hide
     category_location_ids = @category.locations.collect {|x| x.id}.try(:uniq)
@@ -59,7 +56,6 @@ class LocationsController < ApplicationController
     session_location_ids.try(:flatten!).try(:uniq!)
     
     @location_ids = category_location_ids - session_location_ids
-    session[:locations_count] -= @location_ids.size
     
     logger.info "-------------- don't hide these ids #{session_location_ids}"
     logger.info "-------------- hiding location ids #{@location_ids}"
@@ -77,12 +73,52 @@ class LocationsController < ApplicationController
     end    
 
     session[:category_ids] << @category.id unless session[:category_ids].include?(@category.id)
-
-    @category.services.each {|x| session[:service_ids] << x.id}
     
     @location_ids = @category.locations.collect {|x| x.id}.try(:flatten).try(:uniq)
     @hidden_location_ids = Location.all.collect {|x| x.id } - Category.find(session[:category_ids]).collect {|category| category.locations.collect {|x| x.id}}.flatten.uniq
-    session[:locations_count] += @location_ids.size
+        
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def hide_language
+    @language = Language.find(params[:language_id])
+    
+    # hide the language from the session
+    session[:language_ids].delete(@language.id)
+    
+    # find the locations associated with this language, which we want to hide
+    language_location_ids = @language.locations.collect {|x| x.id}
+    
+    # find the locations that are associated to the categories in the session, which we want to keep
+    session_location_ids = []
+    Language.where('id IN (?)', session[:language_ids]).each do |lang|
+      session_location_ids << lang.locations.collect {|x| x.id}
+    end
+    session_location_ids.try(:flatten!).try(:uniq!)
+    
+    @location_ids = language_location_ids - session_location_ids
+    
+    logger.info "-------------- don't hide these ids #{session_location_ids}"
+    logger.info "-------------- hiding location ids #{@location_ids}"
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def show_language
+    @language = Language.find(params[:language_id])
+
+    if session[:language_ids].blank?
+      session[:language_ids] = []
+    end    
+
+    session[:language_ids] << @language.id unless session[:language_ids].include?(@language.id)
+    
+    @location_ids = @language.locations.collect {|x| x.id}
+    @hidden_location_ids = Location.all.collect {|x| x.id } - Language.find(session[:language_ids]).collect {|language| language.locations.collect {|x| x.id}}.flatten.uniq
         
     respond_to do |format|
       format.js

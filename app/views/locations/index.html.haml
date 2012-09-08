@@ -17,11 +17,18 @@
       = render :partial => 'locations'
   
   #filters.span3.well
-    %h3 Filter Services
+    %h3 Services
 
     %table
       - for category in @categories
         = render :partial => 'category', :locals => {:category => category}
+
+    %br/
+    %h3 Languages
+
+    %table
+      - for language in @languages
+        = render :partial => 'language', :locals => {:language => language}
 
                         
 - content_for :scripts do
