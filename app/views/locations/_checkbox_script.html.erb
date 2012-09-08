@@ -3,9 +3,9 @@
     $(".category_checkbox").click(function() {
       var ID = this.id.split("_")[1];
       if ($('#' + this.id).is(':checked')) { 
-        $.get("/locations/show_category.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
+        $.get("/locations/show_locations.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
       } else { 
-        $.get("/locations/hide_category.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
+        $.get("/locations/hide_locations.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"category_id":ID});
       }
     });
   });
@@ -16,9 +16,9 @@
     $(".language_checkbox").click(function() {
       var ID = this.id.split("_")[1];
       if ($('#' + this.id).is(':checked')) { 
-        $.get("/locations/show_language.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"language_id":ID});
+        $.get("/locations/show_locations.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"language_id":ID});
       } else { 
-        $.get("/locations/hide_language.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"language_id":ID});
+        $.get("/locations/hide_locations.js?address=<%= params[:address] %>&miles=<%= params[:miles] %>", {"language_id":ID});
       }
     });
   });
