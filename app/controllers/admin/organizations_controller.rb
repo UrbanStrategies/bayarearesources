@@ -33,19 +33,9 @@ class Admin::OrganizationsController < ApplicationController
 
   def create
     @organization = Organization.new(params[:organization])
-    @languages = []
-    if params[:languages].present?
-      params[:languages].each do |s|
-        @languages << Language.find(s[0].to_i)
-      end
-    end
     
     respond_to do |format|
       if @organization.save
-        if @languages.present?
-          @organization.languages.delete_all
-          @organization.languages << @languages
-        end
         format.html { redirect_to admin_organizations_url, notice: 'Organization was successfully created.' }
       else
         format.html { render action: "new" }
@@ -55,19 +45,9 @@ class Admin::OrganizationsController < ApplicationController
 
   def update
     @organization = Organization.find(params[:id])
-    @languages = []
-    if params[:languages].present?
-      params[:languages].each do |s|
-        @languages << Language.find(s[0].to_i)
-      end
-    end
     
     respond_to do |format|
       if @organization.update_attributes(params[:organization])
-        if @languages.present?
-          @organization.languages.delete_all
-          @organization.languages << @languages
-        end
         format.html { redirect_to admin_organizations_url, notice: 'Organization was successfully updated.' }
       else
         format.html { render action: "edit" }

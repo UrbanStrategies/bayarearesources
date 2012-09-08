@@ -35,9 +35,19 @@ class Admin::LocationsController < ApplicationController
   def create
     @location = Location.new(params[:location])
     @location.organization = @organization
+    @languages = []
+    if params[:languages].present?
+      params[:languages].each do |s|
+        @languages << Language.find(s[0].to_i)
+      end
+    end
 
     respond_to do |format|
       if @location.save
+        if @languages.present?
+          @location.languages.delete_all
+          @location.languages << @languages
+        end
         format.html { redirect_to admin_organization_locations_url(@organization), notice: 'Location was successfully created.' }
       else
         format.html { render action: "new" }
@@ -54,12 +64,22 @@ class Admin::LocationsController < ApplicationController
         @services << Service.find(s[0].to_i)
       end
     end
+    @languages = []
+    if params[:languages].present?
+      params[:languages].each do |s|
+        @languages << Language.find(s[0].to_i)
+      end
+    end
     
     respond_to do |format|
       if @location.update_attributes(params[:location])
         if @services.present?
           @location.services.delete_all
           @location.services << @services
+        end
+        if @languages.present?
+          @organization.languages.delete_all
+          @organization.languages << @languages
         end
         format.html { redirect_to admin_organization_locations_path(@organization), notice: 'Location was successfully updated.' }
       else

@@ -89,6 +89,13 @@
               = check_box_tag "[services][#{service.id}]"
             = service.name
         %br/
+    
+    %h2 Languages
+    %br/
+    - for language in Language.all(:order=>:name)
+      = check_box_tag "location[language_ids][]", language.id, @location.languages.include?(language)
+      = language.name
+      %br/
 
 .row
   .span12

@@ -50,12 +50,6 @@
     .field
       = f.label :goal_4
       = f.text_field :goal_4
-  .span4
-    = f.label :languages
-    - for language in Language.all
-      = check_box_tag "organization[language_ids][]", language.id, @organization.languages.include?(language)
-      = language.name
-      %br/
   
 .actions
   %br/
