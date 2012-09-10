@@ -31,9 +31,11 @@
         - if (@location.services && category.services).present?
           %h4
             = category.name
-          %ul
+          %table
             - for service in category.services
-              %li= service.name
+              %tr
+                %td{:width=>'22px'}= image_tag('check.png')
+                %td= service.name
           %br/
     
     - if @location.organization.try(:locations).try(:size).try(:>, 1)
@@ -62,37 +64,38 @@
     %h3 Accessibility
     %table
       %tr
-        %td{:width=>'200px'} Wheelchair Accessible:
-        %td= @location.wheelchair_accessible
+        %td{:width=>'22px'}= checkbox_helper(@location.wheelchair_accessible)
+        %td Wheelchair Accessible
       %tr
-        %td BART Accessible:
-        %td= @location.bart_accessible
+        %td= checkbox_helper(@location.bart_accessible)
+        %td BART Accessible
       %tr
-        %td MUNI Bus Accessible:
-        %td= @location.muni_bus_accessible
+        %td= checkbox_helper(@location.muni_bus_accessible)
+        %td MUNI Bus Accessible
       %tr
-        %td MUNI Train Accessible:
-        %td= @location.muni_train_accessible
+        %td= checkbox_helper(@location.muni_train_accessible)
+        %td MUNI Train Accessible
       %tr
-        %td AC Bus Accessible:
-        %td= @location.ac_bus_accessible
+        %td= checkbox_helper(@location.ac_bus_accessible)
+        %td AC Bus Accessible
     
       %tr
         %td{:colspan=>2}
           %br/
           %h3 Parking
       %tr
-        %td Free Parking:
-        %td= @location.free_parking
+        %td{:width=>'22px'}= checkbox_helper(@location.free_parking)
+        %td Free Parking
       %tr
-        %td Parking Meters:
-        %td= @location.parking_meters
+        %td= checkbox_helper(@location.parking_meters)
+        %td Parking Meters
       %tr
-        %td Paid Parking Lot:
-        %td= @location.paid_parking_lot
+        %td= checkbox_helper(@location.paid_parking_lot)
+        %td Paid Parking Lot
       %tr
-        %td Free Street Parking:
-        %td= @location.free_street_parking
+        %td= checkbox_helper(@location.free_street_parking)
+        %td Free Street Parking
       %tr
-        %td Parking Fees:
-        %td= @location.parking_fees
+        %td= checkbox_helper(@location.parking_fees)
+        %td Parking Fees
+        
