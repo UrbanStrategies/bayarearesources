@@ -32,10 +32,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
+    params[:user][:password] = rand(36**8).to_s(36)
+    params[:user][:password_confirmation] = params[:user][:password]
     @user = User.new(params[:user])
 
     respond_to do |format|
       if @user.save
+        SignupMailer.invite(@user, params[:user][:password]).deliver
         format.html { redirect_to admin_users_url, notice: 'User was successfully created.' }
       else
         format.html { render action: "new" }

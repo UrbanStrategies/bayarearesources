@@ -7,18 +7,19 @@
 
 .field
   = f.check_box :admin
-  Admin
+  Admin User?
   %br/
   %br/
 .field
   = f.label :email
   = f.email_field :email
-.field
-  = f.label :password
-  = f.password_field :password
-.field
-  = f.label :password_confirmation
-  = f.password_field :password_confirmation
+- unless params[:action] == 'new' || params[:action] == 'create'
+  .field
+    = f.label :password
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
 
 %h3 Authorized Organizations
 %br/

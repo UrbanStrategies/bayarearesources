@@ -30,13 +30,13 @@
       - for category in Category.all(:order => :name)
         - if (@location.services && category.services).present?
           %h4
+            %br/
             = category.name
           %table
             - for service in category.services
               %tr
                 %td{:width=>'22px'}= image_tag('check.png')
                 %td= service.name
-          %br/
     
     - if @location.organization.try(:locations).try(:size).try(:>, 1)
       %br/

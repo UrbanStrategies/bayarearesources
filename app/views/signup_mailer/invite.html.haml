@@ -1,0 +1,23 @@
+%h2
+  Welcome to Asset Builders Bay Area!
+
+%p
+  To log into your account, please use the information below:
+
+%ul
+  %li
+    URL:
+    = link_to 'http://www.assetbuilding-bayarea.org', 'http://www.assetbuilding-bayarea.org'
+  %li
+    Email: 
+    = @user.email
+  %li
+    Temporary Password:
+    = @password
+    
+%p
+  Once you have successfully logged into your account, please change your password.
+
+%p
+  If you have any questions, please contact
+  = mail_to 'info@assettbuilding-bayarea.org', 'info@assettbuilding-bayarea.org'
