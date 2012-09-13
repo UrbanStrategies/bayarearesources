@@ -39,7 +39,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         SignupMailer.invite(@user, params[:user][:password]).deliver
-        format.html { redirect_to admin_users_url, notice: 'User was successfully created.' }
+        format.html { redirect_to admin_users_url, notice: 'User was successfully created. Notification email sent.' }
       else
         format.html { render action: "new" }
       end
@@ -70,7 +70,7 @@ class Admin::UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_users_url }
+      format.html { redirect_to admin_users_url, notice: 'User was successfully deleted.' }
     end
   end
 
