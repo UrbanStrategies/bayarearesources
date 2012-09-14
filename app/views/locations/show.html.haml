@@ -46,10 +46,10 @@
           = link_to location.address, location_path(location)
           %br/
     
-    - if @organization.try(:languages).try(:present?)
+    - if @location.try(:languages).try(:present?)
       %br/
       %h3 Languages
-      - for language in @organization.languages
+      - for language in @location.languages
         = language.name
         %br/
       
