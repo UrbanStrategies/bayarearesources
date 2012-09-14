@@ -39,32 +39,6 @@ class LocationsController < ApplicationController
   
   ####### javascript functions #######
   
-  def hide_category
-    @category = Category.find(params[:category_id])
-    
-    # remove the category_id from the session
-    session[:category_ids].delete(@category.id)
-    
-    # find the locations associated with this category, which we want to hide
-    category_location_ids = @category.locations.collect {|x| x.id}.try(:uniq)
-    
-    # find the locations that are associated to the categories in the session, which we want to keep
-    session_location_ids = []
-    Category.where('id IN (?)', session[:category_ids]).each do |cat|
-      session_location_ids << cat.locations.collect {|x| x.id}
-    end
-    session_location_ids.try(:flatten!).try(:uniq!)
-    
-    @location_ids = category_location_ids - session_location_ids
-    
-    logger.info "-------------- don't hide these ids #{session_location_ids}"
-    logger.info "-------------- hiding location ids #{@location_ids}"
-    
-    respond_to do |format|
-      format.js
-    end
-  end
-  
   def hide_locations
     if params[:language_id].present?
       @language = Language.find(params[:language_id])
