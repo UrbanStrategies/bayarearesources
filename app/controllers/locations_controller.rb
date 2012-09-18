@@ -17,8 +17,8 @@ class LocationsController < ApplicationController
     end
 
     session[:location_ids] = @locations.collect {|x| x.id}
-    session[:language_ids] = nil
-    session[:category_ids] = nil
+    session[:language_ids] = []
+    session[:category_ids] = []
     
     @json = @locations.to_gmaps4rails
     
@@ -80,22 +80,30 @@ class LocationsController < ApplicationController
     @language = Language.find(params[:language_id]) if params[:language_id].present?
     @category = Category.find(params[:category_id]) if params[:category_id].present?
 
-    session[:category_ids] = [] if session[:category_ids].blank?
-    session[:language_ids] = [] if session[:language_ids].blank?
     session[:category_ids] << params[:category_id] unless @category.blank?
     session[:language_ids] << params[:language_id] unless @language.blank?
     session[:category_ids].uniq!
     session[:language_ids].uniq!
     
-    @location_ids_to_show = @language.locations.collect {|x| x.id} if @language.present?
-    @location_ids_to_show = @category.locations.collect {|x| x.id} if @category.present?
-        
-    @location_ids_to_hide = Location.all.collect {|x| x.id } - (Language.find(session[:language_ids]).collect {|language| language.locations.collect {|x| x.id}} + Category.find(session[:category_ids]).collect {|category| category.locations.collect {|x| x.id}}).flatten.uniq
+    language_locations = Language.where(id: session[:language_ids]).map {|language| language.locations.map {|x| x.id}}.inject(:&)
+    category_locations = Category.where(id: session[:category_ids]).map {|category| category.locations.map {|x| x.id}}.inject(:&)
+    
+    if language_locations.blank? && category_locations.blank?
+      combined_location_ids = []
+    elsif language_locations.present? && category_locations.present?
+      combined_location_ids = (language_locations & category_locations)
+    elsif language_locations.present?
+      combined_location_ids = language_locations
+    elsif category_locations.present?
+      combined_location_ids = category_locations
+    end
+    
+    @location_ids_to_show = combined_location_ids
+    @location_ids_to_hide = Location.all.collect {|x| x.id } - combined_location_ids
     
     logger.info "-------------- showing location ids #{@location_ids_to_show}"
     logger.info "-------------- hiding location ids #{@location_ids_to_hide}"
     
-        
     respond_to do |format|
       format.js
     end
