@@ -53,7 +53,7 @@ class LocationsController < ApplicationController
       # find the locations associated with this category, which we want to hide
       category_location_ids_to_hide = @category.locations.collect {|x| x.id}
     end
-  
+    
     # find the locations that are associated to the languages in the session, which we want to keep
     session_location_ids = []
     language_location_ids_to_hide ||= []
@@ -66,8 +66,11 @@ class LocationsController < ApplicationController
       session_location_ids << cat.locations.collect {|x| x.id}
     end
     
-    @location_ids_to_hide = (language_location_ids_to_hide + category_location_ids_to_hide).flatten.uniq - session_location_ids.flatten.uniq
+    # determine the overlap
     
+    @location_ids_to_show = session_location_ids.flatten.uniq
+    @location_ids_to_hide = (language_location_ids_to_hide + category_location_ids_to_hide).flatten.uniq - @location_ids_to_show
+        
     # logger.info "-------------- don't hide these ids #{session_location_ids}"
     # logger.info "-------------- hiding location ids #{@location_ids_to_hide}"
     
