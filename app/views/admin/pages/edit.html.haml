@@ -1,5 +1,5 @@
 %h1.header 
-  Editing Page
+  == Editing #{@page.name}
 
 = form_for( :page, :url => admin_page_path(@page), :html => {:method => :put}) do |f|
   = render :partial => 'form', :locals => {:f => f}
