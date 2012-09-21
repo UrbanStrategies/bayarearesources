@@ -18,6 +18,7 @@ Bayarearesources::Application.routes.draw do
     resources :organizations do
       resources :locations
     end
+    resources :pages
     resources :users
   end
 

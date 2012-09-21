@@ -1,0 +1,10 @@
+%h1.header
+  Pages
+
+%table.table
+  - @pages.each do |page|
+    %tr
+      %td
+        %h3= page.name
+
+      %td{:width=>'40px'}= link_to 'Edit', edit_admin_page_path(page), :class => 'btn btn-mini'

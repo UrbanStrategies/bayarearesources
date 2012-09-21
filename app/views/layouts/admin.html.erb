@@ -42,6 +42,9 @@
           <%= link_to 'Asset Building Bay Area : Admin', root_url, :class => 'brand' %>
           <div class="nav-collapse pull-right">
             <ul class="nav">
+              <% if current_user.admin? %> 
+                <li><%= link_to 'Pages', admin_pages_path %></li>
+              <% end %>
               <li><%= link_to 'Organizations & Locations', admin_organizations_path %></li>
               <% if current_user.admin? %> 
                 <li><%= link_to 'Categories', admin_categories_path %></li>
