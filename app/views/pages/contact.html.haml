@@ -1,1 +1,1 @@
-= raw(Page.where(name: "Contact").try(:body))
+= raw(Page.find_by_name("Contact").try(:body))
