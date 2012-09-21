@@ -26,14 +26,20 @@ class Location < ActiveRecord::Base
     [address, city, 'CA', zipcode].compact.join(', ')
   end
   
-  def gmaps4rails_infowindow
-    string = "<strong>#{self.try(:organization).try(:name)}</strong><br />#{self.address}<br />#{self.city}, CA #{self.zipcode}<br />#{self.phone}<br /><a href='mailto:#{self.email}'>#{self.email}</a><br />"
+  def gmaps4rails_infowindow    
+    string = "<strong>#{self.try(:organization).try(:name)}</strong><br />#{self.address}<br />#{self.city}, CA #{self.zipcode}<br />#{self.phone}<br /><a href='mailto:#{self.email}'>#{self.email}</a><br /><br />"
     if self.services.present?
-      string += "<br />Services:<br /><ul>"
-      self.services.each do |service|
-        string += "<li>#{service.name}</li>"
+      Category.all(:order => :name).each do |category|
+        if (self.services & category.services).present?
+          string += "#{category.name}<ul>"
+          category.services.each do |service|
+            if self.services.include?(service)
+              string += "<li>#{service.name}</li>"
+            end
+          end
+          string += "</ul>"
+        end
       end
-      string += "</ul>"
     end
     return string
   end
