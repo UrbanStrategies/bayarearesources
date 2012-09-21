@@ -2,8 +2,8 @@
 
 .row
   .span6
-    %h3 Contact Information
-    %h4 Location
+    %h3 Contact Info
+    %h4 Location Info
     == #{@location.full_address}
     %br/
     - if @location.phone.present?
@@ -15,9 +15,10 @@
     - if @location.email.present?
       = mail_to @location.email, @location.email
       %br/
+    %br/
     
     - if @organization.present?
-      %h4 Organization
+      %h4 Organization Info
       - if @organization.phone.present?
         = @organization.phone
         %br/
