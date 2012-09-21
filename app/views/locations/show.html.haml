@@ -3,6 +3,7 @@
 .row
   .span6
     %h3 Contact Info
+    %br/
     %h4 Location Info
     == #{@location.full_address}
     %br/
@@ -22,10 +23,13 @@
       - if @organization.phone.present?
         = @organization.phone
         %br/
-      - if @organization.phone.present?
+      - if @organization.contact.present?
+        = @organization.contact
+        %br/
+      - if @organization.email.present?
         = mail_to @organization.email, @organization.email
         %br/
-      - if @organization.phone.present?
+      - if @organization.website.present?
         = link_to @organization.website, @organization.website
         %br/
       %br/
