@@ -6,21 +6,27 @@
     %h4 Location
     == #{@location.full_address}
     %br/
-    = @location.phone
-    %br/
-    = @location.fax
-    %br/
-    = mail_to @location.email, @location.email
-    %br/
+    - if @location.phone.present?
+      = @location.phone
+      %br/
+    - if @location.fax.present?
+      = @location.fax
+      %br/
+    - if @location.email.present?
+      = mail_to @location.email, @location.email
+      %br/
     
     - if @organization.present?
       %h4 Organization
-      = @organization.phone
-      %br/
-      = mail_to @organization.email, @organization.email
-      %br/
-      = link_to @organization.website, @organization.website
-      %br/
+      - if @organization.phone.present?
+        = @organization.phone
+        %br/
+      - if @organization.phone.present?
+        = mail_to @organization.email, @organization.email
+        %br/
+      - if @organization.phone.present?
+        = link_to @organization.website, @organization.website
+        %br/
       %br/
 
     - if @location.hours.present?
