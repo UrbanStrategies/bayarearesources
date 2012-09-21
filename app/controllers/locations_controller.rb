@@ -72,7 +72,11 @@ class LocationsController < ApplicationController
     
     @location_ids_to_show = session_location_ids.flatten.uniq
     @location_ids_to_hide = (language_location_ids_to_hide + category_location_ids_to_hide).flatten.uniq - @location_ids_to_show
-    @results_count = "#{@location_ids_to_show.try(:size)} Results"
+    if @location_ids_to_show.try(:size) == 0
+      @results_count = "Sorry, there are no results for that search"
+    else
+      @results_count = "#{@location_ids_to_show.try(:size)} Results"
+    end
       
     # logger.info "-------------- don't hide these ids #{session_location_ids}"
     # logger.info "-------------- hiding location ids #{@location_ids_to_hide}"
@@ -106,7 +110,11 @@ class LocationsController < ApplicationController
     
     @location_ids_to_show = combined_location_ids
     @location_ids_to_hide = Location.all.collect {|x| x.id } - combined_location_ids
-    @results_count = "#{@location_ids_to_show.try(:size)} Results"
+    if @location_ids_to_show.try(:size) == 0
+      @results_count = "Sorry, there are no results for that search"
+    else
+      @results_count = "#{@location_ids_to_show.try(:size)} Results"
+    end
     
     logger.info "-------------- showing location ids #{@location_ids_to_show}"
     logger.info "-------------- hiding location ids #{@location_ids_to_hide}"
