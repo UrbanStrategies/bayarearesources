@@ -2,13 +2,9 @@
   .alert.alert-error
     == There are no results within #{params[:miles]} miles of your search - please try again.
 - else
-  %h3
-    #results_count
-      == #{@results_count}
-    %br/
   %table.table
     - @locations.each do |location|
-      %tr{:id=>"location_#{location.id}", :class=>"location_listing #{location.categories.collect {|x| ('category_' + x.id.to_s) if x.present?}.try(:join, ' ')}"}
+      %tr{:id=>"location_#{location.id}", :class=>"location_listing #{class_tags(location)}"}
         %td
           %h3
             = link_to location.try(:organization).try(:name), location_path(location)
