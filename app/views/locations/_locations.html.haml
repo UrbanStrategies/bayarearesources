@@ -8,7 +8,7 @@
     %br/
   %table.table
     - @locations.each do |location|
-      %tr{:id=>"location_#{location.id}", :class=>"location_listing"}
+      %tr{:id=>"location_#{location.id}", :class=>"location_listing #{location.categories.collect {|x| ('category_' + x.id.to_s) if x.present?}.try(:join, ' ')}"}
         %td
           %h3
             = link_to location.try(:organization).try(:name), location_path(location)

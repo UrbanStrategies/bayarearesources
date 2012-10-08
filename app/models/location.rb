@@ -14,6 +14,14 @@ class Location < ActiveRecord::Base
   
   validates :organization_id, :presence => true
   
+  def categories
+    categories = []
+    self.services.each do |service|
+      categories << service.category
+    end
+    categories.uniq
+  end
+  
   def org_name
     if organization.present?
       self.organization.name
