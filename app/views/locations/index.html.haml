@@ -29,8 +29,6 @@
     %table
       - for language in @languages
         = render :partial => 'language', :locals => {:language => language}
-
-= debug session
                         
 - content_for :scripts do
   = render :partial => 'checkbox_script'
