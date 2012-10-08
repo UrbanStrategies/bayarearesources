@@ -1,62 +1,24 @@
 <script>
   $(function() {
-    $('.category_checkbox').click(function() {
+    $(':checkbox').click(function() {
       var ID = this.id.split('_')[1];
-      var checked_category_ids = new Array();
-      $('.category_checkbox').each(function(i, value) { 
+      var checked_ids = new Array();
+      $(':checkbox').each(function(i, value) { 
         if($('#' + value.getAttribute('id')).is(':checked')) {
-          checked_category_ids.push(value.getAttribute('id'));
+          checked_ids.push(value.getAttribute('id'));
         } 
       });
-      $.unique(checked_category_ids);
+      $.unique(checked_ids);
       
-      if(checked_category_ids.length === 0) {
-        $('.location_listing').hide();        
+      if(checked_ids.length === 0) {
+        $('.location_listing').show();        
       } else {
         $('.location_listing').hide();
         $('.location_listing').each(function(a, listing) {
           var listing_id_match = true;
-          var listing_category_ids = listing.getAttribute('class');
-          $.each(checked_category_ids, function(b, category_id) {
-            console.log(category_id);
-            console.log(listing_category_ids);
-            if(listing_category_ids.indexOf(category_id) === -1) {
-              listing_id_match = false;
-            }
-          });
-        
-          if(listing_id_match == true) {
-            $('#'+listing.getAttribute('id')).show();
-          }
-        });
-      }
-    });
-  });
-</script>
-
-<script>
-  $(function() {
-    $('.language_checkbox').click(function() {
-      var ID = this.id.split('_')[1];
-      var checked_language_ids = new Array();
-      $('.language_checkbox').each(function(i, value) { 
-        if($('#' + value.getAttribute('id')).is(':checked')) {
-          checked_language_ids.push(value.getAttribute('id'));
-        } 
-      });
-      $.unique(checked_language_ids);
-      
-      if(checked_language_ids.length === 0) {
-        $('.location_listing').hide();        
-      } else {
-        $('.location_listing').hide();
-        $('.location_listing').each(function(a, listing) {
-          var listing_id_match = true;
-          var listing_language_ids = listing.getAttribute('class');
-          $.each(checked_language_ids, function(b, language_id) {
-            console.log(language_id);
-            console.log(listing_language_ids);
-            if(listing_language_ids.indexOf(language_id) === -1) {
+          var listing_ids = listing.getAttribute('class');
+          $.each(checked_ids, function(b, id) {
+            if(listing_ids.indexOf(id) === -1) {
               listing_id_match = false;
             }
           });
