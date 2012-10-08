@@ -10,16 +10,20 @@ module LocationsHelper
   
   def class_tags(location)
     tags = []
-    location.categories.each do |category|
-      if category.present?
-        tags << 'category_' + category.id.to_s
+    if location.categories.present?
+      location.categories.each do |category|
+        if category.present?
+          tags << 'category_' + category.id.to_s
+        end
       end
     end
-    location.languages.each do |language|
-      if language.present?
-        tags << 'language_' + language.id.to_s + ' '
+    if location.languages.present?
+      location.languages.each do |language|
+        if language.present?
+          tags << 'language_' + language.id.to_s
+        end
       end
     end
-    return tags.join(' ')
+    tags.join(' ')
   end
 end
