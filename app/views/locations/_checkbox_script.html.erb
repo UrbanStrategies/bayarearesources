@@ -31,6 +31,8 @@
         });
         if(listings_to_display.length === 0) {
           $("#results_count").html('There are no results that match your search');
+        } else if(listings_to_display.length === 1) {
+          $("#results_count").html(listings_to_display.length + ' result'); 
         } else {
           $("#results_count").html(listings_to_display.length + ' results'); 
         }
