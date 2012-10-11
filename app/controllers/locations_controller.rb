@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
       @address = "Your Address"
     end
     
-    @results_count = "#{@locations.size} Results"
+    @results_count = "#{@locations.size} results"
 
     session[:location_ids] = @locations.collect {|x| x.id}
     session[:language_ids] = []

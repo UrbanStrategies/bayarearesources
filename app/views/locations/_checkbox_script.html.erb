@@ -3,6 +3,7 @@
     $(':checkbox').click(function() {
       var ID = this.id.split('_')[1];
       var checked_ids = new Array();
+      var listings_to_display = new Array();
       $(':checkbox').each(function(i, value) { 
         if($('#' + value.getAttribute('id')).is(':checked')) {
           checked_ids.push(value.getAttribute('id'));
@@ -24,9 +25,15 @@
           });
         
           if(listing_id_match == true) {
+            listings_to_display.push(listing);
             $('#'+listing.getAttribute('id')).show();
           }
         });
+        if(listings_to_display.length === 0) {
+          $("#results_count").html('There are no results that match your search');
+        } else {
+          $("#results_count").html(listings_to_display.length + ' results'); 
+        }
       }
     });
   });

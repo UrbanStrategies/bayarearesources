@@ -2,6 +2,10 @@
   .alert.alert-error
     == There are no results within #{params[:miles]} miles of your search - please try again.
 - else
+  %h3
+    %span{:id => 'results_count'}
+      == #{@results_count}
+    %br/
   %table.table
     - @locations.each do |location|
       %tr{:id=>"location_#{location.id}", :class=>"location_listing #{class_tags(location)}"}
