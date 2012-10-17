@@ -28,6 +28,7 @@
     
     <%= csrf_meta_tags %>
     <%= yield :head %>
+
   </head>
 
   <body>
@@ -92,6 +93,17 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
     <%= yield :scripts %>
+    <script>
+    $(function () {
+        $("a[rel=popover]")
+        .popover({
+           offset: 10
+        })
+        .click(function(e) { 
+               e.preventDefault()
+        })
+     });
+    </script>
 
   </body>
 </html>
