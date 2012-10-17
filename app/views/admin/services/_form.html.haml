@@ -14,7 +14,10 @@
   = f.text_field :name
 .field
   = f.label :description
-  = f.text_area :description, :rows => 10
+  = f.text_area :description, :rows => 4
+.field
+  = f.label :delivery_method
+  = f.select :delivery, options_for_select(['Workshop', 'Online', 'By Appointment'])
 
 .actions
   %br/

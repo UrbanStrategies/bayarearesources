@@ -26,4 +26,12 @@ module LocationsHelper
     end
     tags.join(' ')
   end
+  
+  def popover(service)
+    if service.description.present? && service.delivery.present?
+      "#{service.description}<br /><br />#{service.delivery}"
+    elsif service.description.present?
+      service.description
+    end
+  end
 end
