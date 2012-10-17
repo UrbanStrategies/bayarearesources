@@ -49,7 +49,7 @@
     - if @location.services.present?
       %h3 Services
       - for category in Category.all(:order => :name)
-        - if (@location.services && category.services).present?
+        - if (@location.services & category.services).present?
           %h4
             %br/
             = category.name
