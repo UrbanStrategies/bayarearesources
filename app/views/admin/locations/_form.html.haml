@@ -89,6 +89,10 @@
               = check_box_tag "[services][#{service.id}]"
             = service.name
         %br/
+    .field
+      %h4 Service Delivery Method
+      = f.select :delivery_method, options_for_select(['Workshop', 'Online', 'By Appointment'])
+
     
     %h2 Languages
     %br/
