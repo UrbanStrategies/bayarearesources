@@ -27,9 +27,9 @@ module LocationsHelper
     tags.join(' ')
   end
   
-  def popover(service)
-    if service.description.present? && service.delivery.present?
-      "#{service.description}<br /><br />#{service.delivery}"
+  def popover(service, location)
+    if service.description.present? && location.delivery_method.present?
+      "#{service.description}<br /><br />#{location.delivery_method}"
     elsif service.description.present?
       service.description
     end
