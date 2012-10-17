@@ -57,7 +57,7 @@
             - for service in category.services
               %tr
                 %td{:width=>'22px'}= image_tag('check.png')
-                %td== <a href="#" rel="popover" title='#{service.name}' data-content='#{popover(service)}'>#{service.name}</a>
+                %td== <a href="#" rel="popover" title='#{service.name}' data-content='#{popover(service)}'>What is this service?</a>
     
     - if @location.organization.try(:locations).try(:size).try(:>, 1)
       %br/
