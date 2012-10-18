@@ -19,7 +19,7 @@
           var listing_id_match = true;
           var listing_ids = listing.getAttribute('class');
           $.each(checked_ids, function(b, id) {
-            if(listing_ids.indexOf(id) === -1) {
+            if(listing_ids == null || listing_ids.indexOf(id) === -1) {
               listing_id_match = false;
             }
           });
