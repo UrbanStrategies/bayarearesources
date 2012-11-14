@@ -79,11 +79,14 @@
       <%= yield %>
       
       <div id="footer">
-        <%= image_tag('AC-CAN_logo_small.jpg') %>
-        &nbsp;&nbsp;
-        <%= image_tag('FESP.jpg') %>
-        &nbsp;
-        <%= image_tag('prosperity_partners.jpg') %>
+        <table width="100%">
+          <tr>
+            <td><%= link_to image_tag('AC-CAN_logo_small.jpg'), 'http://www.alamedacountycan.org/index.shtml', :target => '_blank' %></td>
+            <td><%= link_to image_tag('USC.jpg'), 'http://www.urbanstrategies.org/', :target => '_blank' %></td>
+            <td><%= image_tag('FESP.jpg') %></td>
+            <td><%= image_tag('prosperity_partners.jpg') %></td>
+          </tr>
+        </table>
       </div>
         
     </div> <!-- /container -->

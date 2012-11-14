@@ -1,6 +1,6 @@
 class Location < ActiveRecord::Base
   belongs_to :organization
-  has_and_belongs_to_many :services
+  has_and_belongs_to_many :services, :uniq => true
   has_and_belongs_to_many :languages, :uniq => true
   belongs_to :county
   
