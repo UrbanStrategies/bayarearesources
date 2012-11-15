@@ -1,7 +1,7 @@
 %br/
 .row
   .span7
-    Welcome to Asset Building Bay Area. To get started, please enter your home address and then click 'Search' to see the resources near you.  You can also filter your results by clicking the checkboxes in the left column below the map.
+    = simple_format(Page.find_by_name('Home').try(:body))
   .span5
     = form_tag('/locations', :method => :get)
     = text_field_tag :address, nil, :placeholder => @address
