@@ -1,1 +1,2 @@
 = link_to image_tag('eks-banner.jpg'), 'http://earnitkeepitsaveit.org/'
+= simple_format(raw(Page.find_by_name("Resources").try(:body)))
