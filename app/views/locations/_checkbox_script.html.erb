@@ -12,7 +12,10 @@
       $.unique(checked_ids);
       
       if(checked_ids.length === 0) {
-        $('.location_listing').show();        
+        $('.location_listing').each(function(a, listing) {
+          listings_to_display.push(listing);
+          $('#'+listing.getAttribute('id')).show();
+        });  
       } else {
         $('.location_listing').hide();
         $('.location_listing').each(function(a, listing) {
@@ -29,13 +32,13 @@
             $('#'+listing.getAttribute('id')).show();
           }
         });
-        if(listings_to_display.length === 0) {
-          $("#results_count").html('There are no results that match your search');
-        } else if(listings_to_display.length === 1) {
-          $("#results_count").html(listings_to_display.length + ' result'); 
-        } else {
-          $("#results_count").html(listings_to_display.length + ' results'); 
-        }
+      }
+      if(listings_to_display.length === 0) {
+        $("#results_count").html('There are no results that match your search');
+      } else if(listings_to_display.length === 1) {
+        $("#results_count").html(listings_to_display.length + ' result'); 
+      } else {
+        $("#results_count").html(listings_to_display.length + ' results'); 
       }
     });
   });
