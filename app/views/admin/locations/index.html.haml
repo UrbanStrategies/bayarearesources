@@ -5,7 +5,7 @@
   - @locations.each do |location|
     %tr
       %td
-        %h3= location.address
+        %h3= location.full_address
       %td{:width=>'40px'}= link_to 'Edit', edit_admin_organization_location_path(@organization, location), :class => 'btn btn-mini'
       %td{:width=>'50px'}= link_to 'Delete', admin_organization_location_path(@organization, location), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
 
