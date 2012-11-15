@@ -1,12 +1,7 @@
 %br/
 .row
-  .span7
+  .span12
     = simple_format(Page.find_by_name('Home').try(:body))
-  .span5
-    = form_tag('/locations', :method => :get)
-    = text_field_tag :address, nil, :placeholder => @address
-    = select_tag :miles, options_for_select([['1 mile', 1],['2 miles', 2],['3 miles', 3],['4 miles', 4],['5 miles', 5],['10 miles', 10],['20 miles', 20],['30 miles', 30],['40 miles', 40],['50 miles', 50]]), :prompt => "Distance"
-    = submit_tag "Search"
     
 %br/
 = gmaps4rails(@json)
