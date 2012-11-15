@@ -8,7 +8,7 @@
     %br/
   %table.table
     - @locations.each do |location|
-      %tr{:id=>"location_#{location.id}", :class=>"location_listing #{class_tags(location)}"}
+      %tr{:id=>"location_#{location.id}", :class=>"location_listing", 'data-tags' => "#{class_tags(location)}"}
         %td
           %h3
             = link_to location.try(:organization).try(:name), location_path(location)

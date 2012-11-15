@@ -17,7 +17,7 @@
         $('.location_listing').hide();
         $('.location_listing').each(function(a, listing) {
           var listing_id_match = true;
-          var listing_ids = listing.className;
+          var listing_ids = listing.getAttribute('data-tags');
           $.each(checked_ids, function(b, id) {
             if(listing_ids.indexOf(id) === -1) {
               listing_id_match = false;
