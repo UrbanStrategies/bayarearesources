@@ -24,6 +24,13 @@
     %table
       - for language in @languages
         = render :partial => 'language', :locals => {:language => language}
+
+    %br/
+    %h3 Counties
+
+    %table
+      - for county in @counties
+        = render :partial => 'county', :locals => {:county => county}
                         
 - content_for :scripts do
   = render :partial => 'checkbox_script'

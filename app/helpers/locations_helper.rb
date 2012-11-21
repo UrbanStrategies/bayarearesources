@@ -24,6 +24,9 @@ module LocationsHelper
         end
       end
     end
+    if location.county.present?
+      tags << 'county_' + location.county.id.to_s
+    end
     tags.join(' ')
   end
   
