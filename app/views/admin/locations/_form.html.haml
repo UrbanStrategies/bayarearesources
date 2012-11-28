@@ -36,9 +36,9 @@
   .span4
     %h2 Transportation
     %br/
-    .field
+    .field.textarea
       = f.label :directions
-      = f.text_area :directions, :rows => 10
+      = f.text_area :directions, :rows => 7
     .field
       = f.check_box :wheelchair_accessible
       Wheelchair accessible
@@ -115,3 +115,5 @@
         = f.submit 'Save', :class => 'btn btn-success btn-large'
         &nbsp;&nbsp;
         = link_to 'Cancel', admin_organization_locations_path(@organization)
+
+= tinymce

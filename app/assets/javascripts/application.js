@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require_tree .
 //= require gmaps4rails/bing.js
+//= require tinymce
