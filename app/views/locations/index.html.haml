@@ -3,7 +3,6 @@
   .span12
     = simple_format(Page.find_by_name('Home').try(:body))
     
-%br/
 = gmaps4rails(@json)
 
 .row
