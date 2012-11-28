@@ -59,9 +59,18 @@
                 %tr
                   %td{:width=>'22px'}= image_tag('check.png')
                   %td== <a href="#" rel="popover" title='What is this service?' data-content='#{popover(service, @location)}'>#{service.name}</a>
-    
-    - if @location.organization.try(:locations).try(:size).try(:>, 1)
       %br/
+    
+    - if @location.service_delivery_options.present?
+      %h3 How Do I Access These Services?
+      %table
+        - for location in @location.service_delivery_options
+          %tr
+            %td{:width=>'22px'}= image_tag('check.png')
+            %td= location.name
+      %br/
+      
+    - if @location.organization.try(:locations).try(:size).try(:>, 1)
       %h3 Other Locations
       - @location.organization.locations.each do |location|
         - unless location == @location

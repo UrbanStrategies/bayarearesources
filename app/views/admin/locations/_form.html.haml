@@ -90,9 +90,15 @@
             = service.name
         %br/
     .field
-      %h4 Service Delivery Method
-      = f.select :delivery_method, options_for_select(['Workshop', 'Online', 'By Appointment'])
-
+      %h4 Service Delivery Methods
+      - for option in ServiceDeliveryOption.all(:order => :name)
+        .field
+          - if @location.service_delivery_options.include?(option)
+            = check_box_tag "[service_delivery_options][#{option.id}]", 1, true
+          - else
+            = check_box_tag "[service_delivery_options][#{option.id}]"
+          = option.name
+      %br/
     
     %h2 Languages
     %br/

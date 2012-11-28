@@ -1,8 +1,11 @@
 class Location < ActiveRecord::Base
+  belongs_to :county
   belongs_to :organization
+  has_many :location_service_delivery_options
+  has_many :service_delivery_options, :through => :location_service_delivery_options
+  
   has_and_belongs_to_many :services, :uniq => true
   has_and_belongs_to_many :languages, :uniq => true
-  belongs_to :county
   
   
   acts_as_gmappable :address => :full_address

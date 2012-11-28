@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  location_id: 1
+  service_delivery_option_id: 1
+
+two:
+  location_id: 1
+  service_delivery_option_id: 1
