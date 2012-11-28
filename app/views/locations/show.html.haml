@@ -74,7 +74,7 @@
       %h3 Other Locations
       - @location.organization.locations.each do |location|
         - unless location == @location
-          = link_to location.address, location_path(location)
+          = link_to location.full_address, location_path(location)
           %br/
     
     - if @location.try(:languages).try(:present?)
