@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to 'Bay Area Asset Building Resources : Admin', root_url, :class => 'brand' %>
+          <%= link_to 'Admin Console', admin_organizations_url, :class => 'brand' %>
           <div class="nav-collapse pull-right">
             <ul class="nav">
               <% if current_user.admin? %> 
@@ -88,7 +88,6 @@
         theme: 'simple',
       });
     </script>
-    <%= tinymce %>
     
   </body>
 </html>
