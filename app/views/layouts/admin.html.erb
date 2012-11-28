@@ -83,10 +83,12 @@
     <%= javascript_include_tag "application" %>
     <script type="text/javascript">
       tinyMCE.init({
-        mode: 'textareas',
+        mode: 'specific_textareas',
+        editor_selector: 'tinymce', 
         theme: 'simple',
       });
     </script>
+    <%= tinymce %>
     
   </body>
 </html>

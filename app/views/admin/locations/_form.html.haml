@@ -36,9 +36,9 @@
   .span4
     %h2 Transportation
     %br/
-    .field.textarea
+    .field.tinymce
       = f.label :directions
-      = f.text_area :directions, :rows => 7
+      = f.text_area :directions, :rows => 7, :class => 'tinymce'
     .field
       = f.check_box :wheelchair_accessible
       Wheelchair accessible
