@@ -76,13 +76,6 @@
         - unless location == @location
           = link_to location.full_address, location_path(location)
           %br/
-    
-    - if @location.try(:languages).try(:present?)
-      %br/
-      %h3 Languages
-      - for language in @location.languages
-        = language.name
-        %br/
       
   .span5
     = gmaps("markers" => {'data' => @json}, "map_options" => {"auto_zoom" => false, "zoom" => 15})
@@ -129,4 +122,11 @@
       %tr
         %td= checkbox_helper(@location.parking_fees)
         %td Parking Fees
+        
+    - if @location.try(:languages).try(:present?)
+      %br/
+      %h3 Languages
+      - for language in @location.languages
+        = language.name
+        %br/
         
