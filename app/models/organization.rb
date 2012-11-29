@@ -6,7 +6,7 @@ class Organization < ActiveRecord::Base
 
   geocoded_by :full_address  
   
-  attr_accessible :address, :city, :description, :email, :goal_1, :goal_2, :goal_3, :goal_4, :latitude, :longitude, :name, :phone, :population, :website, :zipcode, :county_id, :language_ids
+  attr_accessible :address, :city, :description, :email, :latitude, :longitude, :name, :phone, :population, :website, :zipcode, :county_id, :language_ids
   
   after_validation :geocode
   
