@@ -12,24 +12,24 @@
   
   #filters.span3.well
     %h3 Services
-
     %table
       - for category in @categories
         = render :partial => 'category', :locals => {:category => category}
 
     %br/
     %h3 Languages
-
     %table
       - for language in @languages
         = render :partial => 'language', :locals => {:language => language}
 
     %br/
     %h3 Counties
-
     %table
       - for county in @counties
         = render :partial => 'county', :locals => {:county => county}
-                        
+    
+    %br/           
+    = link_to 'Clear Filters', '#', :id => 'clear_filters'
+            
 - content_for :scripts do
   = render :partial => 'checkbox_script'
