@@ -1,9 +1,0 @@
-<% for id in @location_ids_to_hide %>
-  $("#location_<%= id %>").hide('normal');
-<% end %>
-
-<% for id in @location_ids_to_show %>
-  $("#location_<%= id %>").show('normal');
-<% end %>
-
-$("#results_count").html("<%= @results_count %>");
