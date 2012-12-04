@@ -29,7 +29,8 @@
         = render :partial => 'county', :locals => {:county => county}
     
     %br/           
-    = link_to 'Clear Filters', '#', :id => 'clear_filters'
+    %span{:id => 'clear_filters'}
+      Clear Filters
             
 - content_for :scripts do
   = render :partial => 'checkbox_script'

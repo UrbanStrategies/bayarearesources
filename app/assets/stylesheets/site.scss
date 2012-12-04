@@ -19,3 +19,11 @@ h1.location{margin-bottom: 1em; }
 .field.tinymce{
   margin-bottom: 20px;
 }
+#clear_filters{
+  color: rgb(0, 136, 204);
+}
+#clear_filters:hover{
+  color: #005580;
+  text-decoration: underline;
+  cursor: pointer;
+}
