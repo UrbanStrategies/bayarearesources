@@ -11,7 +11,7 @@
       = render :partial => 'locations'
   
   #filters.span3.well
-    %h3 Services
+    %h3 Categories
     %table
       - for category in @categories
         = render :partial => 'category', :locals => {:category => category}
