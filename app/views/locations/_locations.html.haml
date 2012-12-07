@@ -16,4 +16,6 @@
           %br/
           - if location.services.present?
             - for service in location.services
-              == #{service.name} •
+              = service.name
+              - unless service == location.services.last
+                •
