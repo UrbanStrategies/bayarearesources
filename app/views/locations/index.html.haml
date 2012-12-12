@@ -6,11 +6,11 @@
 = gmaps('markers' => {"data" => @json}, 'map_options' => { 'raw' => '{ scrollwheel: false }' })
 
 .row
-  .span8
+  .span7
     #locations
       = render :partial => 'locations'
   
-  #filters.span3.well
+  #filters.span4.well
     %h3 Categories
     %table
       - for category in @categories
