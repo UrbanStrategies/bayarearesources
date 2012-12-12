@@ -5,8 +5,8 @@
     = category.name
     == (#{category.locations.size})
     %div{:class => 'services', :id => "category_#{category.id}_services"}
-      - for subcategory in category.services
+      - for service in category.services
         %div
-          = check_box_tag "subcategory_#{subcategory.id}", false, session[:subcategory_ids].try(:include?, subcategory.id), :class => 'subcategory_checkbox'
-          = subcategory.name
-          == (#{subcategory.locations.size})
+          = check_box_tag "service_#{service.id}", false, session[:service_ids].try(:include?, service.id), :class => 'service_checkbox'
+          = service.name
+          == (#{service.locations.size})
