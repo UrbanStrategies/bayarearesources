@@ -18,9 +18,9 @@ module LocationsHelper
       end
     end
     if location.services.present?
-      location.services.each do |subcategory|
-        if subcategory.present?
-          tags << 'subcategory_' + subcategory.id.to_s
+      location.services.each do |service|
+        if service.present?
+          tags << 'service_' + service.id.to_s
         end
       end
     end

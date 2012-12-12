@@ -28,11 +28,11 @@
       var listings_to_display = new Array();
       $(':checkbox').each(function(i, value) { 
         if($('#' + value.getAttribute('id')).is(':checked')) {
-          $('#' + value.getAttribute('id') + '_subcategories').show();
+          $('#' + value.getAttribute('id') + '_services').show();
           checked_ids.push(value.getAttribute('id'));
         } else {
-          $('#' + value.getAttribute('id') + '_subcategories').hide();
-          $('#' + value.getAttribute('id') + '_subcategories :checkbox').attr('checked', false);   
+          $('#' + value.getAttribute('id') + '_services').hide();
+          $('#' + value.getAttribute('id') + '_services :checkbox').attr('checked', false);   
         } 
       });
       $.unique(checked_ids);

@@ -4,7 +4,7 @@
   %td.top
     = category.name
     == (#{category.locations.size})
-    %div{:class => 'subcategories', :id => "category_#{category.id}_subcategories"}
+    %div{:class => 'services', :id => "category_#{category.id}_services"}
       - for subcategory in category.services
         %div
           = check_box_tag "subcategory_#{subcategory.id}", false, session[:subcategory_ids].try(:include?, subcategory.id), :class => 'subcategory_checkbox'
