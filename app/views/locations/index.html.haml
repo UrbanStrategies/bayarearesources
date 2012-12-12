@@ -3,6 +3,8 @@
   .span12
     = simple_format(Page.find_by_name('Home').try(:body))
     
+= gmaps('markers' => {"data" => @json}, 'map_options' => { 'raw' => '{ scrollwheel: false }' })
+
 .row
   .span8
     #locations
