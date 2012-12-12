@@ -33,5 +33,8 @@
       Clear Filters
             
 - content_for :scripts do
-  = render :partial => 'clear_checkboxes'
+  :javascript
+    $(document).ready(function() {
+    $(':checkbox').attr('checked', false);
+    });
   = render :partial => 'checkboxes'
