@@ -8,12 +8,19 @@ module LocationsHelper
     end
   end
   
-  def class_tags(location)
+  def data_tags(location)
     tags = []
     if location.categories.present?
       location.categories.each do |category|
         if category.present?
           tags << 'category_' + category.id.to_s
+        end
+      end
+    end
+    if location.services.present?
+      location.services.each do |subcategory|
+        if subcategory.present?
+          tags << 'subcategory_' + subcategory.id.to_s
         end
       end
     end

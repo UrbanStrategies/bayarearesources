@@ -1,4 +1,5 @@
 <script>
+  // Clear filters
   $(function() {
     $('#clear_filters').click(function() {
       $(':checkbox').attr('checked', false);
@@ -18,6 +19,8 @@
     });
   });
   
+  
+  // Filter buttons
   $(function() {
     $(':checkbox').click(function() {
       var ID = this.id.split('_')[1];
@@ -25,7 +28,11 @@
       var listings_to_display = new Array();
       $(':checkbox').each(function(i, value) { 
         if($('#' + value.getAttribute('id')).is(':checked')) {
+          $('#' + value.getAttribute('id') + '_subcategories').show();
           checked_ids.push(value.getAttribute('id'));
+        } else {
+          $('#' + value.getAttribute('id') + '_subcategories').hide();
+          $('#' + value.getAttribute('id') + '_subcategories :checkbox').attr('checked', false);   
         } 
       });
       $.unique(checked_ids);

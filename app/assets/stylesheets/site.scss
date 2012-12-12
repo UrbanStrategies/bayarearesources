@@ -1,6 +1,7 @@
 td.top{ vertical-align: top; }
 h1.header{ margin-bottom: 1em; }
 h1.location{margin-bottom: 1em; }
+h3{ padding-bottom: 5px; }
 .center{ text-align: center !important; }
 .box-rotate {
      -moz-transform: rotate(-60deg);  /* FF3.5+ */
@@ -9,24 +10,13 @@ h1.location{margin-bottom: 1em; }
              filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083);  /* IE6,IE7 */
          -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)"; /* IE8 */
 }
-#miles{width: 90px;}
-#filters{margin-left: 60px;}
+#miles{ width: 90px; }
+#filters{ margin-left: 60px; }
 .filter-title{ margin-top: 1em; margin-bottom: 1em; }
-#footer{margin-top: 40px; text-align: center;}
-.field textarea{
-  width: 90%;
-}
-.field.tinymce{
-  margin-bottom: 20px;
-}
-#clear_filters{
-  color: rgb(0, 136, 204);
-}
-#clear_filters:hover{
-  color: #005580;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.bold{
-  font-weight: bold;
-}
+#footer{ margin-top: 40px; text-align: center;}
+.field textarea{ width: 90%; }
+.field.tinymce{ margin-bottom: 20px; }
+#clear_filters{ color: rgb(0, 136, 204); }
+#clear_filters:hover{ color: #005580; text-decoration: underline; cursor: pointer; }
+.bold{ font-weight: bold; }
+.subcategories{ padding: 5px 0 10px 0; display: none; }

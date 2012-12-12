@@ -8,14 +8,8 @@
     %br/
   %table.table
     - @locations.each do |location|
-      %tr{:id=>"location_#{location.id}", :class=>"location_listing", 'data-tags'=>"#{class_tags(location)}"}
+      %tr{:id=>"location_#{location.id}", :class=>"location_listing", 'data-tags'=>"#{data_tags(location)}"}
         %td
           %h3
             = link_to location.try(:organization).try(:name), location_path(location)
-          %span.bold= location.full_address
-          %br/
-          - if location.services.present?
-            - for service in location.services
-              = service.name
-              - unless service == location.services.last
-                •
+          = location.full_address
