@@ -1,12 +1,12 @@
 %tr
   %td.top{:width=>'20px'}
-    = check_box_tag "category_#{category.id}", false, session[:category_ids].try(:include?, category.id), :class => 'category_checkbox'
+    = check_box_tag "category_#{category.id}", :class => 'category_checkbox'
   %td.top
     = category.name
     == (#{category.locations.size})
     %div{:class => 'services', :id => "category_#{category.id}_services"}
       - for service in category.services
         %div
-          = check_box_tag "service_#{service.id}", false, session[:service_ids].try(:include?, service.id), :class => 'service_checkbox'
+          = check_box_tag "service_#{service.id}", :class => 'service_checkbox'
           = service.name
           == (#{service.locations.size})

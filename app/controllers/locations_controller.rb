@@ -17,10 +17,6 @@ class LocationsController < ApplicationController
     end
     
     @results_count = "#{@locations.size} results"
-
-    session[:location_ids] = @locations.collect {|x| x.id}
-    session[:language_ids] = []
-    session[:category_ids] = []
     
     @json = @locations.to_gmaps4rails
     

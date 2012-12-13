@@ -1,15 +1,11 @@
-- if @locations.blank?
-  .alert.alert-error
-    == There are no results within #{params[:miles]} miles of your search - please try again.
-- else
-  %h3
-    %span{:id => 'results_count'}
-      == #{@results_count}
-    %br/
-  %table.table
-    - @locations.each do |location|
-      %tr{:id=>"location_#{location.id}", :class=>"location_listing", 'data-tags'=>"#{data_tags(location)}"}
-        %td
-          %h3
-            = link_to location.try(:organization).try(:name), location_path(location)
-          = location.full_address
+%h3
+  %span{:id => 'results_count'}
+    == #{@results_count}
+  %br/
+%table.table
+  - @locations.each do |location|
+    %tr{:id=>"location_#{location.id}", :class=>"location_listing", 'data-tags'=>"#{data_tags(location)}"}
+      %td
+        %h3
+          = link_to location.try(:organization).try(:name), location_path(location)
+        = location.full_address
