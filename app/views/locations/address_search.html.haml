@@ -1,0 +1,24 @@
+%br/
+.row
+  .span5
+    %p Enter your home address to find locations near you.
+    = form_tag('/address_search', :method => :get)
+    - if params[:address].blank?
+      = text_field_tag :address, nil, :placeholder => "Your Address"
+    - else
+      = text_field_tag :address, nil, :value => params[:address]
+    
+    - if params[:miles].blank?
+      = select_tag :miles, options_for_select([['1 mile', 1],['2 miles', 2],['3 miles', 3],['4 miles', 4],['5 miles', 5],['10 miles', 10],['20 miles', 20],['30 miles', 30],['40 miles', 40],['50 miles', 50]]), :prompt => "Distance"
+    - else
+      = select_tag :miles, options_for_select([['1 mile', 1],['2 miles', 2],['3 miles', 3],['4 miles', 4],['5 miles', 5],['10 miles', 10],['20 miles', 20],['30 miles', 30],['40 miles', 40],['50 miles', 50]], :selected => params[:miles])
+    
+    
+    = submit_tag "Search"
+
+= gmaps('markers' => {"data" => @json}, 'map_options' => { 'raw' => '{ scrollwheel: false }' })
+
+.row
+  .span8
+    #locations
+      = render :partial => 'locations'
