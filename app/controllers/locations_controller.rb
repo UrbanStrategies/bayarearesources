@@ -24,11 +24,6 @@ class LocationsController < ApplicationController
     @categories = Category.all(:order=>:name)
     @languages = Language.all
     @services = Service.all(:order=>:name)
-    if params[:miles].present?
-      @distance = ""
-    else
-      @distance = "Distance"
-    end
     
     params[:miles] = 10 if params[:miles].blank? || params[:miles] == 'Distance'  
 
