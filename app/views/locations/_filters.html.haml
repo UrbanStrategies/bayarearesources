@@ -4,19 +4,40 @@
 %h3 Categories
 %table
   - for category in @categories
-    = render :partial => 'category', :locals => {:category => category}
+    %tr
+      %td.top{:width=>'20px'}
+        = check_box_tag "category_#{category.id}", :class => 'category_checkbox'
+      %td.top
+        = category.name
+        == (#{category.locations.size})
+        %div{:class => 'services', :id => "category_#{category.id}_services"}
+          - for service in category.services
+            %div
+              = check_box_tag "service_#{service.id}", :class => 'service_checkbox'
+              = service.name
+              == (#{service.locations.size})
 %br/
 
 %h3 Languages
 %table
   - for language in @languages
-    = render :partial => 'language', :locals => {:language => language}
+    %tr
+      %td.top{:width=>'20px'}
+        = check_box_tag "language_#{language.id}", :class => 'language_checkbox'
+      %td.top
+        = language.name
+        == (#{language.locations.size})
 %br/
 
 %h3 Counties
 %table
   - for county in @counties
-    = render :partial => 'county', :locals => {:county => county}
+    %tr
+      %td.top{:width=>'20px'}
+        = check_box_tag "county_#{county.id}", :class => 'county_checkbox'
+      %td.top
+        = county.name
+        == (#{county.locations.size})
 %br/
 
 %div{:id => 'clear_filters'}
