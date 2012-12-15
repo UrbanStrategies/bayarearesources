@@ -10,7 +10,16 @@ class LocationsController < ApplicationController
     locations = Location.all
     @locations = locations.sort_by(&:org_name)
     
-    @results_count = "#{@locations.size} results"
+    if params[:address].present?
+      @locations = Location.near(params[:address], params[:miles])
+      @address = params[:address]
+      @results_count = "#{@locations.size} results within #{params[:miles]} miles of #{@address}"
+    else
+      locations = Location.all
+      @locations = locations.sort_by(&:org_name)
+      @address = "Your Address"
+      @results_count = "#{@locations.size} results"
+    end
     
     @json = @locations.to_gmaps4rails
     
@@ -19,32 +28,6 @@ class LocationsController < ApplicationController
     end
   end
   
-  def address_search
-    @counties = County.all(:order => :name)
-    @categories = Category.all(:order=>:name)
-    @languages = Language.all
-    @services = Service.all(:order=>:name)
-    
-    params[:miles] = 10 if params[:miles].blank? || params[:miles] == 'Distance'  
-
-    if params[:address].present?
-      @locations = Location.near(params[:address], params[:miles])
-      @address = params[:address]
-    else
-      locations = Location.all
-      @locations = locations.sort_by(&:org_name)
-      @address = "Your Address"
-    end
-    
-    @results_count = "#{@locations.size} results within #{params[:miles]} miles of #{@address}"
-    
-    @json = @locations.to_gmaps4rails
-    
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-  end
-
   def show
     @location = Location.find(params[:id])
     @organization = @location.organization
