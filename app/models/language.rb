@@ -9,4 +9,8 @@ class Language < ActiveRecord::Base
   #   end
   #   locations.flatten.uniq
   # end
+  
+  def results_in_set(locations_set)
+    (self.locations & locations_set).try(:size)
+  end
 end
