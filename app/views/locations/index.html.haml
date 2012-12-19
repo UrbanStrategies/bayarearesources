@@ -11,7 +11,7 @@
       = render :partial => 'locations'
   
   #sidebar.span4.well
-    = render :partial => 'filters'
+    = render :partial => 'filters', :locals => {:locations => @locations}
     = render :partial => 'address_search'
         
 - content_for :scripts do
