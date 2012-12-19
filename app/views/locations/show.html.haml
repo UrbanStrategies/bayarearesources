@@ -45,7 +45,16 @@
       = @location.organization.population
       %br/
       %br/
-
+    
+    - if @location.service_delivery_options.present?
+      %h3 How Do I Access These Services?
+      %table
+        - for location in @location.service_delivery_options
+          %tr
+            %td{:width=>'22px'}= image_tag('check.png')
+            %td= location.name
+      %br/
+  
     - if @location.services.present?
       %h3 Services
       - for category in Category.all(:order => :name)
@@ -60,16 +69,7 @@
                   %td{:width=>'22px'}= image_tag('check.png')
                   %td== <a href="#" rel="popover" title='What is this service?' data-content='#{popover(service, @location)}'>#{service.name}</a>
       %br/
-    
-    - if @location.service_delivery_options.present?
-      %h3 How Do I Access These Services?
-      %table
-        - for location in @location.service_delivery_options
-          %tr
-            %td{:width=>'22px'}= image_tag('check.png')
-            %td= location.name
-      %br/
-      
+          
     - if @location.organization.try(:locations).try(:size).try(:>, 1)
       %h3 Other Locations
       - @location.organization.locations.each do |location|
@@ -85,6 +85,13 @@
       %br/
       %br/
   
+    - if @location.try(:languages).try(:present?)
+      %br/
+      %h3 Languages
+      - for language in @location.languages
+        = language.name
+        %br/
+          
     %h3 Accessibility
     %table
       %tr
@@ -123,12 +130,6 @@
         %td= checkbox_helper(@location.parking_fees)
         %td Parking Fees
         
-    - if @location.try(:languages).try(:present?)
-      %br/
-      %h3 Languages
-      - for language in @location.languages
-        = language.name
-        %br/
         
 - content_for :scripts do
   :javascript

@@ -1,7 +1,10 @@
 %h2 Filter Results
+
+%div{:id => 'clear_filters'}
+  Clear Filters
 %br/
 
-%h3 Categories
+%h3 Service Categories
 %table
   - for category in @categories
     %tr
@@ -39,8 +42,5 @@
         = county.name
         == (#{county.locations.size})
 %br/
-
-%div{:id => 'clear_filters'}
-  Clear Filters
 %br/
-= link_to 'Search by Address', '/?address_search=true'
+= link_to 'Search by Address', '/?address_search=true', :class => 'btn btn-primary'
