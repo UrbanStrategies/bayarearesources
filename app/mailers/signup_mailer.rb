@@ -1,5 +1,5 @@
 class SignupMailer < ActionMailer::Base
-  default from: "info@assetbuilding-bayarea.org"
+  default from: "donotreply@assetbuilding-bayarea.org"
 
   def invite(user, password)
     @user = user
