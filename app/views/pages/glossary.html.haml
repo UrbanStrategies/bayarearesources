@@ -1,3 +1,3 @@
 %h1 Glossary
 %br/
-= simple_format(raw(Page.find_by_name("Glossary").try(:body)))
+= raw(Page.find_by_name("Glossary").try(:body))
