@@ -46,10 +46,12 @@
         $('.location_listing').hide();
         $('.location_listing').each(function(a, listing) {
           var listing_id_match = true;
-          var listing_ids = listing.getAttribute('data-tags');
+          var listing_tags = listing.getAttribute('data-tags').split(' ');
           $.each(checked_ids, function(b, id) {
-            if(listing_ids.indexOf(id) === -1) {
+            if(listing_tags.indexOf(id) === -1) {
               listing_id_match = false;
+              // only need one mismatch - looping again might override the false value if the next id is a match
+              return;
             }
           });
           if(listing_id_match == true) {
