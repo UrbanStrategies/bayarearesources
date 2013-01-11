@@ -7,5 +7,5 @@
     %tr{:id=>"location_#{location.id}", :class=>"location_listing", 'data-tags'=>"#{data_tags(location)}"}
       %td
         %h3
-          = link_to location.try(:organization).try(:name), location_path(location)
+          = link_to location.try(:organization).try(:name), location_path(location), :target => '_blank'
         = location.full_address
