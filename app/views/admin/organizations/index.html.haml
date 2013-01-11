@@ -2,8 +2,10 @@
   Organizations
 
 - if current_user.admin?
-  %p= link_to 'New Organization', new_admin_organization_path, :class => 'btn btn-large btn-success'
-
+  %p
+    = link_to 'New Organization', new_admin_organization_path, :class => 'btn btn-large btn-success'
+  %br/
+    
 - if @organizations.blank?
   There are no organizations associated with this account.
 - else

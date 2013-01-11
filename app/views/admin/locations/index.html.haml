@@ -1,8 +1,9 @@
 %h1.header
   = @organization.name
-  
-- if current_user.admin?
-  %p= link_to 'New Location', new_admin_location_path, :class => 'btn btn-large btn-success'
+
+%p
+  = link_to 'New Location', new_admin_organization_location_path(@organization), :class => 'btn btn-large btn-success'
+%br/
 
 %table.table
   - @locations.each do |location|
