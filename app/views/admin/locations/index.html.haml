@@ -1,5 +1,8 @@
 %h1.header
   = @organization.name
+  
+- if current_user.admin?
+  %p= link_to 'New Location', new_admin_location_path, :class => 'btn btn-large btn-success'
 
 %table.table
   - @locations.each do |location|
@@ -8,6 +11,3 @@
         %h3= location.full_address
       %td{:width=>'40px'}= link_to 'Edit', edit_admin_organization_location_path(@organization, location), :class => 'btn btn-mini'
       %td{:width=>'50px'}= link_to 'Delete', admin_organization_location_path(@organization, location), :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-mini btn-danger'
-
-%br/
-= link_to 'New Location', new_admin_organization_location_path(@organization), :class => 'btn btn-large btn-success'
