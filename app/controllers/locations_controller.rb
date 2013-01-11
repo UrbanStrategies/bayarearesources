@@ -11,7 +11,8 @@ class LocationsController < ApplicationController
     @locations = locations.sort_by(&:org_name)
     
     if params[:address].present?
-      @locations = Location.near(params[:address], params[:miles])
+      address = "#{params[:address]}, California"
+      @locations = Location.near(address, params[:miles])
       @address = params[:address]
       @results_count = "#{@locations.size} results within #{params[:miles]} miles of #{@address}"
     else

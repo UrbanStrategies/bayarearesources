@@ -1,8 +1,13 @@
 %h2 Filter Results
 
-%div{:id => 'clear_filters'}
-  Clear Filters
-%br/
+- if params[:address].present?
+  = link_to 'Clear Filters', root_url
+  %br/
+  %br/
+- else
+  %div{:id => 'clear_filters'}
+    Clear Filters
+  %br/
 
 %h3 Service Categories
 %table

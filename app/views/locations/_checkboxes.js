@@ -3,11 +3,11 @@
   $(function() {
     $('#clear_filters').click(function() {
       $(':checkbox').attr('checked', false);
+      $('.services').hide();
       var listings_to_display = new Array();
       $('.location_listing').each(function(a, listing) {
         listings_to_display.push(listing);
         $('#'+listing.getAttribute('id')).show();
-        
       });
       if(listings_to_display.length === 0) {
         $("#results_count").html('There are no results that match your search');
