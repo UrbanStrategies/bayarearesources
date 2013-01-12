@@ -2,6 +2,7 @@
 $(document).ready ->
   checked_ids = $.session.get('checked_ids')
   if($.isEmptyObject(checked_ids) == false)
+    console.log(checked_ids)
     listings_to_display = new Array()
     $(checked_ids.split(',')).each((x, id) ->
       $('#'+id).attr('checked', true)
