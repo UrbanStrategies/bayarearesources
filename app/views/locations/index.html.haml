@@ -13,9 +13,3 @@
   #sidebar.span4.well
     = render :partial => 'filters', :locals => {:locations => @locations}
     = render :partial => 'address_search'
-        
-- content_for :scripts do
-  :javascript
-    $(document).ready(function() {
-    $(':checkbox').attr('checked', false);
-    });
