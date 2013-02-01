@@ -12,7 +12,9 @@ class LocationsController < ApplicationController
     
     if params[:address].present?
       address = "#{params[:address]}, California"
-      @locations = Location.near(address, params[:miles])
+      center_point = [37.816148,-122.267757]
+      box = Geocoder::Calculations.bounding_box(center_point, 50)
+      @locations = Location.near(address, params[:miles]).within_bounding_box(box)
       @address = params[:address]
       @results_count = "#{@locations.size} results within #{params[:miles]} miles of #{@address}"
     else
