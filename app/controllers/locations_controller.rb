@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
     @locations = locations.sort_by(&:org_name)
     
     if params[:address].present?
-      address = "#{params[:address]}, California"
+      address = "#{params[:address]}"
       center_point = [37.816148,-122.267757]
       box = Geocoder::Calculations.bounding_box(center_point, 50)
       @locations = Location.near(address, params[:miles]).within_bounding_box(box)
