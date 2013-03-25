@@ -1,8 +1,8 @@
 class Admin::LocationsController < ApplicationController
-  layout 'admin'
   before_filter :authenticate_user!
-  before_filter :load_variables
   load_and_authorize_resource
+  before_filter :load_variables
+  layout 'admin'
   
   def index
     @locations = @organization.locations

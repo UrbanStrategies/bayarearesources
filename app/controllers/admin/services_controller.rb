@@ -1,6 +1,7 @@
 class Admin::ServicesController < ApplicationController
-  layout 'admin'
   before_filter :authenticate_user!
+  load_and_authorize_resource
+  layout 'admin'
   before_filter :load_variables
   
   def index
