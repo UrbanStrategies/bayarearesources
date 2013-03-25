@@ -1,7 +1,6 @@
 Bayarearesources::Application.routes.draw do
   root :to => 'locations#index'   
   resources :locations, :only => [:index, :show]
-  resources :services
   devise_for :users
   
   
