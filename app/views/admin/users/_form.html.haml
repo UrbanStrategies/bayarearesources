@@ -15,11 +15,15 @@
   = f.email_field :email
 - unless params[:action] == 'new' || params[:action] == 'create'
   .field
-    = f.label :password
+    = f.label :password, "Password (leave blank if you don't want to change)"
     = f.password_field :password
   .field
     = f.label :password_confirmation
     = f.password_field :password_confirmation
+  .field
+    = f.label :current_password, "Current Password (we need your current password to confirm your changes)"
+    = f.password_field :current_password
+    
 
 %h3 Authorized Organizations
 %br/
