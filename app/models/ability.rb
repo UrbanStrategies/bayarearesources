@@ -8,12 +8,9 @@ class Ability
       if user.admin?
         can :manage, :all
       else
-        can :manage, Organization do |org|
-          org.try(:user_ids).try(:include?, user.id)
-        end
-        can :manage, Location do |location|
-          location.try(:organization).try(:user_ids).try(:include?, user.id)
-        end
+        can :manage, Organization, :id => user.organization_ids
+        can :manage, Location
+        cam :manage, User, :id => user.id
       end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
