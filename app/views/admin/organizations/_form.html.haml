@@ -1,5 +1,5 @@
 -if @organization.errors.any?
-  #error_explanation
+  .alert.alert-error
     %h2= "#{pluralize(@organization.errors.count, "error")} prohibited this organization from being saved:"
     %ul
       - @organization.errors.full_messages.each do |msg|
